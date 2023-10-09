@@ -65,4 +65,15 @@ public class IsometricPlayer : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (DashActive)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+    }
 }
