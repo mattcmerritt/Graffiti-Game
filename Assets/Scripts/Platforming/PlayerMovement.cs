@@ -8,16 +8,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D Rb;
     [SerializeField] private float TopHorizSpeed;
     [SerializeField] private float JumpForce, DashForce;
-    [SerializeField] private float DashCooldown,CurrentDashCooldown;
-    [SerializeField] private float DashDuration, CurrentDashDuration;
-    [SerializeField] private bool DashActive, FreeFall;
+    [SerializeField] private float DashCooldown, DashDuration;
+    private float CurrentDashCooldown, CurrentDashDuration;
+    private bool DashActive;
     [SerializeField] private float InitialGravity;
-    [SerializeField] private Vector2 PlayerVelocity;
-    [SerializeField] private GroundChecker GroundCheck;
-    [SerializeField] private string DashDirection;
-    [SerializeField] private SpriteRenderer Renderer;
+    private Vector2 PlayerVelocity;
+    private GroundChecker GroundCheck;
+    private string DashDirection;
+    private SpriteRenderer Renderer;
     [SerializeField] private Color PlayerColor, CooldownColor, DashBuddyColor;
     public static event Action Dash;
+    private PlaneChecker PlaneCheck;
 
     private void OnEnable() 
     {
@@ -33,15 +34,38 @@ public class PlayerMovement : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         GroundCheck = GetComponentInChildren<GroundChecker>();
+        PlaneCheck = GetComponentInChildren<PlaneChecker>();
         Renderer = GetComponent<SpriteRenderer>();
         Rb.gravityScale = InitialGravity; // set gravity to initial value
     }
 
     private void Update() 
     {
+        // check for dash
         if(Input.GetKey(KeyCode.Space) && CurrentDashCooldown <= 0) 
         {
             Dash.Invoke();
+        }
+
+        // move player to front of the closest surface
+        List<GameObject> intersectedPlanes = PlaneCheck.GetAllIntersectingPlanes();
+        if(intersectedPlanes.Count > 0)
+        {
+            GameObject closestPlane = intersectedPlanes[0];
+            // TODO: this won't work if planes are behind the camera, so don't do that
+            float minDistanceFromCamera = Mathf.Abs(Camera.main.gameObject.transform.position.z - closestPlane.transform.position.z);
+            foreach (GameObject plane in intersectedPlanes)
+            {
+                float distFromCamera = Mathf.Abs(Camera.main.gameObject.transform.position.z - plane.transform.position.z);
+                if(distFromCamera < minDistanceFromCamera)
+                {
+                    closestPlane = plane;
+                    minDistanceFromCamera = distFromCamera;
+                }
+            }
+
+            // move to plane's z position without changing x or y to put player in front of plane
+            transform.position = new Vector3(transform.position.x, transform.position.y, closestPlane.transform.position.z);
         }
 
         // update last direction moved in to store for dash
@@ -50,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
             DashDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
         }
 
+        // handle cooldowns
         if(CurrentDashDuration > 0)
         {
             Renderer.color = DashBuddyColor;
@@ -78,9 +103,10 @@ public class PlayerMovement : MonoBehaviour
                 DashActive = false;
             }
         }
-        else if(FreeFall) 
+        else if(PlaneCheck.GetAllIntersectingPlanes().Count == 0) 
         {
             // controls for when not on a surface (free fall)
+            
         }
         else 
         {

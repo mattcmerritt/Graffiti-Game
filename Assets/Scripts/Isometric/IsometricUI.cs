@@ -6,6 +6,7 @@ public class IsometricUI : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Lives;
     [SerializeField] private IsometricPlayer Player;
+    [SerializeField] private IsometricSimpleEnemy[] Enemies;
     [SerializeField] private SceneTransitioner Transitioner;
 
     private void Start()
@@ -15,13 +16,15 @@ public class IsometricUI : MonoBehaviour
 
     private void Update()
     {
+        Enemies = FindObjectsOfType<IsometricSimpleEnemy>();
+
         int lives = Player.GetLives();
         for (int i = 0; i < Lives.Count; i++)
         {
             Lives[i].SetActive(i < lives);
         }
 
-        if (lives <= 0)
+        if (lives <= 0 || Enemies.Length == 0)
         {
             Transitioner.Transition();
         }
