@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Color PlayerColor, CooldownColor, DashBuddyColor, ImmobileColor;
     public static event Action Dash;
     private PlaneChecker PlaneCheck;
+    [SerializeField] private GameObject RespawnMessage;
+    [SerializeField] private float OutOfBoundsTimer;
+    private float TimeSpentOutOfBounds;
 
     private void OnEnable() 
     {
@@ -37,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         PlaneCheck = GetComponentInChildren<PlaneChecker>();
         Renderer = GetComponent<SpriteRenderer>();
         Rb.gravityScale = InitialGravity; // set gravity to initial value
+        RespawnMessage.SetActive(false);
     }
 
     private void Update() 
@@ -98,6 +102,33 @@ public class PlayerMovement : MonoBehaviour
         {
             // normal, can dash
             Renderer.color = PlayerColor;
+        }
+
+        // display respawn text if player in fail state
+        if (intersectedPlanes.Count == 0)
+        {
+            TimeSpentOutOfBounds += Time.deltaTime;
+            if(TimeSpentOutOfBounds >= OutOfBoundsTimer) 
+            {
+                // player might be falling out of bounds
+                RespawnMessage.SetActive(true);
+            }
+            else if(Rb.velocity == Vector2.zero)
+            {
+                // player has no momentum and will remain stuck
+                RespawnMessage.SetActive(true);
+            }
+        }
+        else
+        {
+            TimeSpentOutOfBounds = 0;
+            RespawnMessage.SetActive(false);
+        }
+
+        // respawn player if R is pressed
+        if(Input.GetKeyDown(KeyCode.R)) 
+        {
+            RespawnPlayer();
         }
     }
 
@@ -181,5 +212,32 @@ public class PlayerMovement : MonoBehaviour
         {
             Rb.AddForce(transform.right * DashForce, ForceMode2D.Impulse);
         }
+    }
+
+    private void RespawnPlayer()
+    {
+        GameObject[] respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+        if(respawnPoints.Length > 0)
+        {
+            GameObject closestRespawn = respawnPoints[0];
+            float minDistanceFromRespawn = Vector3.Distance(transform.position, closestRespawn.transform.position);
+            foreach (GameObject respawn in respawnPoints)
+            {
+                float distFromRespawn = Vector3.Distance(transform.position, respawn.transform.position);
+                if(distFromRespawn < minDistanceFromRespawn)
+                {
+                    closestRespawn = respawn;
+                    minDistanceFromRespawn = distFromRespawn;
+                }
+            }
+
+            transform.position = closestRespawn.transform.position;
+            RespawnMessage.SetActive(false);
+        }
+        else 
+        {
+            Debug.LogError("No respawn points found! Mark them with the \"Respawn\" tag.");
+        }
+        
     }
 }
