@@ -5,18 +5,45 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitioner : MonoBehaviour
 {
-    [SerializeField] private int NextScene;
+    [SerializeField] private string PreviousScene, CurrentScene;
+    [SerializeField] private bool CompletedLastEncounter;
+    [SerializeField] private List<string> CompletedEncounters;
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKey(KeyCode.Return))
-        {
-            Transition();
-        }
+        DontDestroyOnLoad(gameObject);
+        CompletedEncounters = new List<string>();
     }
 
-    public void Transition()
+    public void LoadEncounter(string encounterName)
     {
-        SceneManager.LoadScene(NextScene);
+        string debugOutput = "<color=green>Transitioner: </color>\nBEFORE:Current: " + CurrentScene + " Previous: " + PreviousScene;
+        PreviousScene = CurrentScene;
+        CurrentScene = encounterName;
+        CompletedLastEncounter = false;
+        SceneManager.LoadScene(CurrentScene);
+        debugOutput += "\n\nAFTER: Current: " + CurrentScene + " Previous: " + PreviousScene;
+        Debug.Log(debugOutput);
+    }
+
+    public void ReturnToCity(bool successful)
+    {
+        string debugOutput = "<color=green>Transitioner: </color>\nBEFORE: Current: " + CurrentScene + " Previous: " + PreviousScene;
+        CompletedLastEncounter = successful;
+        string tempCurrentScene = CurrentScene;
+        CurrentScene = PreviousScene;
+        PreviousScene = tempCurrentScene;
+        if (successful)
+        {
+            CompletedEncounters.Add(PreviousScene);
+        }
+        SceneManager.LoadScene(CurrentScene);
+        debugOutput += "\n\nAFTER: Current: " + CurrentScene + " Previous: " + PreviousScene;
+        Debug.Log(debugOutput);
+    }
+
+    public bool GetEncounterCompleted(string encounter)
+    {
+        return CompletedEncounters.Contains(encounter);
     }
 }

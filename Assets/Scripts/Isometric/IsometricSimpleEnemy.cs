@@ -38,6 +38,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
             if (CurrentChargeTimer >= ChargeDuration)
             {
                 Charging = false;
+                CurrentChargeTimer = 0;
             }
         }
         // Otherwise, keep trying to get close to the player

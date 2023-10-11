@@ -24,9 +24,13 @@ public class IsometricUI : MonoBehaviour
             Lives[i].SetActive(i < lives);
         }
 
-        if (lives <= 0 || Enemies.Length == 0)
+        if (lives <= 0)
         {
-            Transitioner.Transition();
+            Transitioner.ReturnToCity(false);
+        }            
+        else if (Enemies.Length == 0)
+        {
+            Transitioner.ReturnToCity(true);
         }
     }
 }

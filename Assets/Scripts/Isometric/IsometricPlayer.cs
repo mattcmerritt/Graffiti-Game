@@ -29,7 +29,7 @@ public class IsometricPlayer : MonoBehaviour
         // Dash functionality
         if (DashEnabled && DashAvailable && Input.GetKey(KeyCode.Space))
         {
-            Debug.Log("Dashed!");
+            // Debug.Log("Dashed!");
             SpriteRenderer.color = Color.green;
             Rigidbody.velocity = DashForce * input;
             DashActive = true; // activate the dash state
@@ -50,7 +50,7 @@ public class IsometricPlayer : MonoBehaviour
                 DashCooldown += Time.deltaTime;
                 if (DashCooldown >= MaxDashCooldown)
                 {
-                    Debug.Log("Dash cooldown is over!");
+                    // Debug.Log("Dash cooldown is over!");
                     SpriteRenderer.color = Color.black;
                     DashAvailable = true;
                 }
@@ -62,7 +62,7 @@ public class IsometricPlayer : MonoBehaviour
             DashDuration += Time.deltaTime;
             if (DashDuration >= MaxDashDuration)
             {
-                Debug.Log("Dash is over!");
+                // Debug.Log("Dash is over!");
                 SpriteRenderer.color = Color.blue;
                 DashActive = false;
             }
