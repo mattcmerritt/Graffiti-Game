@@ -400,6 +400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Encounter Entrance (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4751785015601902596, guid: e6d30462b5facf34eb383bf4330b2c8a, type: 3}
+      propertyPath: EncounterSceneName
+      value: 3DIsometricEncounter2
+      objectReference: {fileID: 0}
     - target: {fileID: 6254487849481645361, guid: e6d30462b5facf34eb383bf4330b2c8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.71

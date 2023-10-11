@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3DIsometric.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/3DIsometricEncounter2.unity
+    guid: 05615167ae2dce746a060eeb214c26f4
   m_configObjects: {}
