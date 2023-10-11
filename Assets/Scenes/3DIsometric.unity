@@ -1451,6 +1451,7 @@ MonoBehaviour:
   MaxDashCooldown: 0.5
   MaxDashDuration: 0.25
   SpriteRenderer: {fileID: 1174299333}
+  CorrectionRatio: {x: 0.85, y: 1.15, z: 0}
 --- !u!54 &1174299336
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1476,7 +1477,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1265765636
 GameObject:

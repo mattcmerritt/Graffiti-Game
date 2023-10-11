@@ -15,13 +15,15 @@ public class IsometricPlayer : MonoBehaviour
 
     // Debug, change player color to reflect state
     [SerializeField] private SpriteRenderer SpriteRenderer;
+    [SerializeField] private Vector3 CorrectionRatio;
 
     private void Update()
     {
         // Movement input vectors
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-        Vector3 input = (horizontalInput * new Vector3(1, 0, -1) + verticalInput * new Vector3(1, 0, 1)).normalized;
+        Vector3 normalizedInput = Vector3.Normalize(new Vector3(horizontalInput, verticalInput, 0));
+        Vector3 input = normalizedInput.x * new Vector3(1, 0, -1) * CorrectionRatio.x + normalizedInput.y * new Vector3(1, 0, 1) * CorrectionRatio.y;
 
         // Dash functionality
         if (DashEnabled && DashAvailable && Input.GetKey(KeyCode.Space))
