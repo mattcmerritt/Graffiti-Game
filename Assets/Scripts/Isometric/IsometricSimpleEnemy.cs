@@ -81,6 +81,26 @@ public class IsometricSimpleEnemy : MonoBehaviour
         }
     }
 
+    // If colliding with a player, register a hit.
+    private void OnCollisionEnter(Collision collision)
+    {
+        IsometricPlayer player = collision.gameObject.GetComponent<IsometricPlayer>();
+        if (player != null)
+        {
+            bool playerDashing = player.GetDashActive();
+            // If the player was dashing, the enemy is defeated
+            if (playerDashing)
+            {
+                Destroy(gameObject);
+            }
+            // If the player is not dashing and the enemy charges at them, it hurts the player
+            else if (Charging && !playerDashing)
+            {
+                player.HurtPlayer();
+            }
+        }
+    }
+
     private void StartPreparing()
     {
         Preparing = true;

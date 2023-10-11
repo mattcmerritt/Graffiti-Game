@@ -11,7 +11,12 @@ public class SceneTransitioner : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Return))
         {
-            SceneManager.LoadScene(NextScene);
+            Transition();
         }
+    }
+
+    public void Transition()
+    {
+        SceneManager.LoadScene(NextScene);
     }
 }

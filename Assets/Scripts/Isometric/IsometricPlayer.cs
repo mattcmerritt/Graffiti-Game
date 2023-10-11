@@ -7,6 +7,7 @@ public class IsometricPlayer : MonoBehaviour
     // Components and variables
     [SerializeField, Range(0, 50)] private float MoveSpeed = 5f, DashForce;
     [SerializeField] private Rigidbody Rigidbody;
+    [SerializeField] private int Lives = 3;
 
     // Internal dash state tracking information
     [SerializeField] private bool DashEnabled, DashAvailable, DashActive;
@@ -72,10 +73,26 @@ public class IsometricPlayer : MonoBehaviour
     {
         if (DashActive)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag("Obstacle"))
             {
                 Destroy(collision.gameObject);
             }
         }
+    }
+
+    public bool GetDashActive()
+    {
+        return DashActive;
+    }
+
+    public void HurtPlayer()
+    {
+        SpriteRenderer.color = new Color(1, 0.5f, 0);
+        Lives--;
+    }
+
+    public int GetLives()
+    {
+        return Lives;
     }
 }
