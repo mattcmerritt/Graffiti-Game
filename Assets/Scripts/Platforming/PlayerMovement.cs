@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private GroundChecker GroundCheck;
     private string DashDirection;
     private SpriteRenderer Renderer;
-    [SerializeField] private Color PlayerColor, CooldownColor, DashBuddyColor;
+    [SerializeField] private Color PlayerColor, CooldownColor, DashBuddyColor, ImmobileColor;
     public static event Action Dash;
     private PlaneChecker PlaneCheck;
 
@@ -41,12 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update() 
     {
-        // check for dash
-        if(Input.GetKey(KeyCode.Space) && CurrentDashCooldown <= 0) 
-        {
-            Dash.Invoke();
-        }
-
         // move player to front of the closest surface
         List<GameObject> intersectedPlanes = PlaneCheck.GetAllIntersectingPlanes();
         if(intersectedPlanes.Count > 0)
@@ -68,26 +62,41 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, closestPlane.transform.position.z);
         }
 
+        // check for dash
+        if(Input.GetKey(KeyCode.Space) && CurrentDashCooldown <= 0 && intersectedPlanes.Count > 0) 
+        {
+            Dash.Invoke();
+        }
+
         // update last direction moved in to store for dash
         if(Input.GetAxisRaw("Horizontal") != 0)
         {
             DashDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
         }
 
-        // handle cooldowns
+        // handle cooldowns and colors
         if(CurrentDashDuration > 0)
         {
+            // dashing
             Renderer.color = DashBuddyColor;
             CurrentDashCooldown -= Time.deltaTime;
             CurrentDashDuration -= Time.deltaTime;
         }
+        else if(intersectedPlanes.Count == 0)
+        {
+            // not on a plane - can't move
+            Renderer.color = ImmobileColor; 
+            CurrentDashCooldown -= Time.deltaTime;
+        }
         else if(CurrentDashCooldown > 0)
         {
+            // could dash, but on cooldown
             Renderer.color = CooldownColor;
             CurrentDashCooldown -= Time.deltaTime;
         }
         else
         {
+            // normal, can dash
             Renderer.color = PlayerColor;
         }
     }
