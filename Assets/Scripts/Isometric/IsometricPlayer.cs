@@ -27,7 +27,7 @@ public class IsometricPlayer : MonoBehaviour
         Vector3 input = normalizedInput.x * new Vector3(1, 0, -1) * CorrectionRatio.x + normalizedInput.y * new Vector3(1, 0, 1) * CorrectionRatio.y;
 
         // Dash functionality
-        if (DashEnabled && DashAvailable && Input.GetKey(KeyCode.Space))
+        if (DashEnabled && DashAvailable && Input.GetKey(KeyCode.LeftShift))
         {
             // Debug.Log("Dashed!");
             SpriteRenderer.color = Color.green;
