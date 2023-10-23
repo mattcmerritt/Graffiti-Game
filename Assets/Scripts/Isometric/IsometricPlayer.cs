@@ -18,6 +18,12 @@ public class IsometricPlayer : MonoBehaviour
     [SerializeField] private float HitDelay, MaxHitDelay;
     [SerializeField] private bool HitRecently;
 
+    // Attack state information
+    [SerializeField] private GameObject AttackVisual;
+    [SerializeField] private Vector3 Direction;
+    [SerializeField] private bool AttackActive;
+    [SerializeField] private float AttackDuration, MaxAttackDuration;
+
     // Debug, change player color to reflect state
     [SerializeField] private SpriteRenderer SpriteRenderer;
     [SerializeField] private Vector3 CorrectionRatio;
@@ -81,6 +87,68 @@ public class IsometricPlayer : MonoBehaviour
                 HitDelay = 0f;
                 SpriteRenderer.color = Color.black;
                 HitRecently = false;
+            }
+        }
+
+        Direction = new Vector3(horizontalInput, verticalInput, 0f);
+        // Simple attack animation
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // TODO: Reimplement with a function
+            Vector3 NE = Vector3.right + Vector3.up;
+            Vector3 NW = Vector3.left + Vector3.up;
+            Vector3 SE = Vector3.right + Vector3.down;
+            Vector3 SW = Vector3.left + Vector3.down;
+            float rotation = 0f;
+
+            if (Direction == NW)
+            {
+                rotation = 0;
+            }
+            else if (Direction == Vector3.up)
+            {
+                rotation = 45;
+            }
+            else if (Direction == NE)
+            {
+                rotation = 90;
+            }
+            else if (Direction == Vector3.right)
+            {
+                rotation = 135;
+            }
+            else if (Direction == SE)
+            {
+                rotation = 180;
+            }
+            else if (Direction == Vector3.down)
+            {
+                rotation = 225;
+            }
+            else if (Direction == SW)
+            {
+                rotation = 270;
+            }
+            else if (Direction == Vector3.left)
+            {
+                rotation = 315;
+            }
+            
+            
+            AttackVisual.transform.eulerAngles = new Vector3(90f, rotation, 0f);
+            AttackActive = true;
+            AttackDuration = 0f;
+            AttackVisual.SetActive(true);
+        }
+
+        // Attack disappears after duration
+        if (AttackActive)
+        {
+            AttackDuration += Time.deltaTime;
+            if (AttackDuration >= MaxAttackDuration)
+            {
+                AttackActive = false;
+                AttackVisual.SetActive(false);
             }
         }
     }

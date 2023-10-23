@@ -70,6 +70,11 @@ public class IsometricSimpleEnemy : MonoBehaviour
     // If close to player, begin preparing a charge.
     private void OnTriggerEnter(Collider other)
     {
+        // If the player swing hits an enemy, it dies
+        if (other.CompareTag("Player Hitbox"))
+        {
+            Destroy(gameObject);
+        }
         if (other.GetComponent<IsometricPlayer>() != null)
         {
             StartPreparing();
