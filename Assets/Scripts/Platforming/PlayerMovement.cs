@@ -123,6 +123,16 @@ public class PlayerMovement : MonoBehaviour
         {
             TimeSpentOutOfBounds = 0;
             RespawnMessage.SetActive(false);
+
+            // check for jump inputs (W / up arrow handled in FixedUpdate)
+            if(GroundCheck == null) 
+            {
+                Debug.LogError("The player has no GroundChecker to use. Please add one.");
+            }
+            else if(Input.GetKeyDown(KeyCode.Space) && GroundCheck.CheckIfGrounded())
+            {
+                Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
+            }
         }
 
         // respawn player if R is pressed
@@ -173,8 +183,8 @@ public class PlayerMovement : MonoBehaviour
 
                 // TODO: check player bounds, and position them back in the wall if they are not in it
             }
-            
-            // vertical controls when on a surface
+
+            // vertical controls when on a surface (space handled in Update)
             if(GroundCheck == null) 
             {
                 Debug.LogError("The player has no GroundChecker to use. Please add one.");
