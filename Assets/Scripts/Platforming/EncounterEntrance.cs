@@ -22,7 +22,7 @@ public class EncounterEntrance : MonoBehaviour
     {
         if (other.GetComponent<PlayerMovement>() != null)
         {
-            Transitioner.LoadEncounter(EncounterSceneName);
+            StartCoroutine(Transitioner.LoadEncounter(EncounterSceneName));
         }
     }
 }
