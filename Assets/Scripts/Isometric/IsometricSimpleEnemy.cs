@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class IsometricSimpleEnemy : MonoBehaviour
 {
+    // Components and variables
     [SerializeField] private GameObject Player;
     [SerializeField] private Rigidbody Rigidbody;
-    [SerializeField] private bool Preparing, Charging;
-    [SerializeField] private float PrepDuration, CurrentPrepTimer, ChargeDuration, CurrentChargeTimer;
+
+    // State information for enemy attacks
+    [SerializeField] private bool Preparing, Charging, Retreating;
+    [SerializeField] private float PrepDuration, ChargeDuration, RetreatDuration;
+    [SerializeField] private float CurrentPrepTimer, CurrentChargeTimer, CurrentRetreatTimer;
     [SerializeField] private Vector3 ChargeDirection;
-    [SerializeField] private float MoveSpeed, ChargeSpeed;
+    [SerializeField] private float MoveSpeed, ChargeSpeed, RetreatSpeed;
 
     private void Start()
     {
@@ -31,14 +35,28 @@ public class IsometricSimpleEnemy : MonoBehaviour
                 Rigidbody.velocity = ChargeDirection * ChargeSpeed;
             }
         }
-        // If charging, keep track of how long the charge has been going for
+        // If charging, keep track of how long the charge has been going for and start retreating at end
         else if (Charging)
         {
             CurrentChargeTimer += Time.deltaTime;
             if (CurrentChargeTimer >= ChargeDuration)
             {
                 Charging = false;
+                Retreating = true;
+
                 CurrentChargeTimer = 0;
+            }
+        }
+        // If retreating, run away from the player for a bit
+        else if (Retreating)
+        {
+            CurrentRetreatTimer += Time.deltaTime;
+            Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
+            Rigidbody.velocity = directionToPlayer * RetreatSpeed * -1;
+            if (CurrentRetreatTimer >= RetreatDuration)
+            {
+                Retreating = false;
+                CurrentRetreatTimer = 0;
             }
         }
         // Otherwise, keep trying to get close to the player
@@ -63,7 +81,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
     {
         if (other.GetComponent<IsometricPlayer>() != null)
         {
-            if (!Charging && !Preparing)
+            if (!Charging && !Retreating && !Preparing)
             {
                 StartPreparing();
             }
