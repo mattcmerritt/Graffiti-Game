@@ -182,6 +182,7 @@ MonoBehaviour:
   MoveSpeed: 5
   DashForce: 20
   Rigidbody: {fileID: 5485539355407836792}
+  Lives: 3
   DashEnabled: 1
   DashAvailable: 1
   DashActive: 0
@@ -189,5 +190,8 @@ MonoBehaviour:
   DashDuration: 0
   MaxDashCooldown: 0.5
   MaxDashDuration: 0.25
+  HitDelay: 0
+  MaxHitDelay: 1
+  HitRecently: 0
   SpriteRenderer: {fileID: 3223796879788354555}
   CorrectionRatio: {x: 0.85, y: 1.15, z: 0}

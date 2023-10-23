@@ -14,6 +14,10 @@ public class IsometricPlayer : MonoBehaviour
     [SerializeField] private float DashCooldown, DashDuration;
     [SerializeField] private float MaxDashCooldown, MaxDashDuration;
 
+    // Information related to hitstun and invincibility
+    [SerializeField] private float HitDelay, MaxHitDelay;
+    [SerializeField] private bool HitRecently;
+
     // Debug, change player color to reflect state
     [SerializeField] private SpriteRenderer SpriteRenderer;
     [SerializeField] private Vector3 CorrectionRatio;
@@ -67,6 +71,18 @@ public class IsometricPlayer : MonoBehaviour
                 DashActive = false;
             }
         }
+
+        // Health management and hitstun/i-frames
+        if (HitRecently)
+        {
+            HitDelay -= Time.deltaTime;
+            if (HitDelay <= 0f)
+            {
+                HitDelay = 0f;
+                SpriteRenderer.color = Color.black;
+                HitRecently = false;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -87,8 +103,13 @@ public class IsometricPlayer : MonoBehaviour
 
     public void HurtPlayer()
     {
-        SpriteRenderer.color = new Color(1, 0.5f, 0);
-        Lives--;
+        if (!HitRecently)
+        {
+            HitRecently = true;
+            HitDelay = MaxHitDelay;
+            SpriteRenderer.color = new Color(1, 0.5f, 0);
+            Lives--;
+        }
     }
 
     public int GetLives()
