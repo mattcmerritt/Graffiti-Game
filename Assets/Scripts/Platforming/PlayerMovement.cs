@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         // respawn player if R is pressed
         if(Input.GetKeyDown(KeyCode.R)) 
         {
-            RespawnPlayer();
+            RespawnPlayerAtNearest();
         }
     }
 
@@ -214,14 +214,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void RespawnPlayer()
+    private void RespawnPlayerAtNearest()
     {
-        GameObject[] respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
-        if(respawnPoints.Length > 0)
+        RespawnPoint[] respawnPoints = FindObjectsOfType<RespawnPoint>();
+        List<GameObject> respawnObjects = new List<GameObject>();
+        foreach (RespawnPoint r in respawnPoints)
         {
-            GameObject closestRespawn = respawnPoints[0];
+            respawnObjects.Add(r.gameObject);
+        }
+        if(respawnObjects.Count > 0)
+        {
+            GameObject closestRespawn = respawnObjects[0];
             float minDistanceFromRespawn = Vector3.Distance(transform.position, closestRespawn.transform.position);
-            foreach (GameObject respawn in respawnPoints)
+            foreach (GameObject respawn in respawnObjects)
             {
                 float distFromRespawn = Vector3.Distance(transform.position, respawn.transform.position);
                 if(distFromRespawn < minDistanceFromRespawn)
@@ -236,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else 
         {
-            Debug.LogError("No respawn points found! Mark them with the \"Respawn\" tag.");
+            Debug.LogError("No respawn points found! Add objects with the RespawnPoint script.");
         }
         
     }

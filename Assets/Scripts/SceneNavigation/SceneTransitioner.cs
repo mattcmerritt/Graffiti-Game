@@ -46,4 +46,9 @@ public class SceneTransitioner : MonoBehaviour
     {
         return CompletedEncounters.Contains(encounter);
     }
+
+    public string GetPreviousScene()
+    {
+        return PreviousScene;
+    }
 }

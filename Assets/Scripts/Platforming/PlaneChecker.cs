@@ -16,9 +16,9 @@ public class PlaneChecker : MonoBehaviour
         return CurrentPlanes;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.tag == "PlatformingPlane")
+        if(other.gameObject.tag == "PlatformingPlane" && !CurrentPlanes.Contains(other.gameObject))
         {
             CurrentPlanes.Add(other.gameObject);
         }
