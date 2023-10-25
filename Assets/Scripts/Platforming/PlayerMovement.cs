@@ -242,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
             foreach (GameObject respawn in respawnObjects)
             {
                 float distFromRespawn = Vector3.Distance(transform.position, respawn.transform.position);
-                if(distFromRespawn < minDistanceFromRespawn)
+                if(distFromRespawn < minDistanceFromRespawn && respawn.GetComponent<RespawnPoint>().CheckIfActivated())
                 {
                     closestRespawn = respawn;
                     minDistanceFromRespawn = distFromRespawn;

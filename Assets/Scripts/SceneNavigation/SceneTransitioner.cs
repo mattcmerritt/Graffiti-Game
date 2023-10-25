@@ -8,6 +8,7 @@ public class SceneTransitioner : MonoBehaviour
     [SerializeField] private string PreviousScene, CurrentScene;
     [SerializeField] private bool CompletedLastEncounter;
     [SerializeField] private List<string> CompletedEncounters;
+    [SerializeField] private List<string> ActivatedRespawnPoints;
 
     // Transition animation details
     [SerializeField] private float TransitionDuration;
@@ -20,6 +21,7 @@ public class SceneTransitioner : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         CompletedEncounters = new List<string>();
+        ActivatedRespawnPoints = new List<string>();
     }
 
     public IEnumerator LoadEncounter(string encounterName)
@@ -91,5 +93,18 @@ public class SceneTransitioner : MonoBehaviour
     public string GetPreviousScene()
     {
         return PreviousScene;
+    }
+
+    public void AddActivatedRespawn(string respawn)
+    {
+        if(!ActivatedRespawnPoints.Contains(respawn)) 
+        {
+            ActivatedRespawnPoints.Add(respawn);
+        }
+    }
+
+    public bool CheckIfRespawnActivated(string respawn)
+    {
+        return ActivatedRespawnPoints.Contains(respawn);
     }
 }
