@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using TMPro;
 
 public class DialogueUI : MonoBehaviour
 {
+    // State information
+    private bool ConversationActive;
+
     // Holder for the current line to display
     [SerializeField] private DialogueLine CurrentLine;  // the dialogue line to display
     
@@ -14,6 +18,20 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TMP_Text SpeakerName;      // the title field that holds the speaker's name
     [SerializeField] private TMP_Text Message;          // the message field that holds the speaker's text
     [SerializeField] private GameObject DialogueBox;    // the entire dialogue interface at the bottom of the screen
+
+    // Events that can be attached to for detecting conversation completion
+    public event Action OnConversationOver;
+
+    private void Update()
+    {
+        if (ConversationActive)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GoToNextLine();
+            }
+        }
+    }
 
     public void DisplayCurrentLine()
     {
@@ -34,6 +52,8 @@ public class DialogueUI : MonoBehaviour
         // Set the current DialogueLine to the one passed in
         CurrentLine = firstLine;
         DisplayCurrentLine();
+
+        ConversationActive = true;
     }
 
     public void GoToNextLine()
@@ -45,6 +65,9 @@ public class DialogueUI : MonoBehaviour
         if(CurrentLine == null)
         {
             DialogueBox.SetActive(false);
+            OnConversationOver?.Invoke();
+
+            ConversationActive = false;
         }
         // Otherwise, display the new line
         else

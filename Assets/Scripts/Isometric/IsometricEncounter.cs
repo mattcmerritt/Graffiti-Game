@@ -16,6 +16,7 @@ public class IsometricEncounter : MonoBehaviour
     private IsometricNPC NPC;
     private SceneTransitioner Transitioner;
     private IsometricPlayer Player;
+    private DialogueUI Dialogue;
 
     // Singleton instance to allow player to read critical information
     public static IsometricEncounter Instance;
@@ -35,6 +36,7 @@ public class IsometricEncounter : MonoBehaviour
         Enemies = FindObjectsOfType<IsometricSimpleEnemy>();
         NPC = FindObjectOfType<IsometricNPC>();
         Player = FindObjectOfType<IsometricPlayer>();
+        Dialogue = FindObjectOfType<DialogueUI>(true);
 
         RemainingEnemies = Enemies.Length;
         PlayerHealth = Player.GetHealthPercentage();
@@ -48,6 +50,7 @@ public class IsometricEncounter : MonoBehaviour
 
         if (NPC != null)
         {
+            NPC.AttachToDialogueUI(Dialogue);
             NPC.OnConversationComplete += TrackNPCComplete;
         }
     }

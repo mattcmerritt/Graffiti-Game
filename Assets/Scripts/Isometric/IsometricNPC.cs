@@ -5,16 +5,24 @@ using UnityEngine;
 
 public class IsometricNPC : MonoBehaviour
 {
+    // Tracking the conversation progress
+    private bool ConversationStarted, ConversationCompleted;
+
+    // Useful if NPC has multiple trigger boxes
     [SerializeField] private bool InteractTriggerHit;
     [SerializeField] private Collider PreviousInteractor;
 
     public event Action<IsometricNPC> OnConversationComplete;
 
+    // Dialogue Information
+    private DialogueUI DialogueUI;
+    [SerializeField] private DialogueLine StartingLine;
+
     private void OnTriggerEnter(Collider other)
     {
         // If NPC is intended to have multiple collision boxes, add && !InteractTriggerHit
         // and bring back commented lines
-        if (other.CompareTag("Player Hitbox"))
+        if (other.CompareTag("Player Hitbox") && !ConversationStarted && !ConversationCompleted)
         {
             Interact();
             // Multiple collision box additions
@@ -37,16 +45,22 @@ public class IsometricNPC : MonoBehaviour
     //     } 
     // }
 
+    public void AttachToDialogueUI(DialogueUI dialogueUI)
+    {
+        DialogueUI = dialogueUI;
+        DialogueUI.OnConversationOver += CompleteInteraction;
+    }
+
     private void Interact()
     {
         Debug.Log($"<color=yellow>Interactions: </color>{gameObject.name} NPC interacted with.");
-
-        // TODO: move to a separate part of the program after the dialogue is completed
-        CompleteInteraction();
+        DialogueUI.StartConversation(StartingLine);
+        ConversationStarted = true;
     }
 
     private void CompleteInteraction()
     {
         OnConversationComplete?.Invoke(this);
+        ConversationCompleted = true;
     }
 }
