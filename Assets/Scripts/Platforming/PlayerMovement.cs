@@ -140,6 +140,9 @@ public class PlayerMovement : MonoBehaviour
         {
             RespawnPlayerAtNearest();
         }
+
+        // grab camera for following
+        Camera.main.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.gameObject.transform.position.z);
     }
 
     // Update is called once per frame
