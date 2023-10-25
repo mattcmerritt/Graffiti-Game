@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Rigidbody: {fileID: 6871808157106505995}
+  DamageDealt: 35
   Preparing: 0
   Charging: 0
   Retreating: 0

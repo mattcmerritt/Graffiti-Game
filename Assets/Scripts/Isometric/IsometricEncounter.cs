@@ -37,7 +37,7 @@ public class IsometricEncounter : MonoBehaviour
         Player = FindObjectOfType<IsometricPlayer>();
 
         RemainingEnemies = Enemies.Length;
-        PlayerHealth = Player.GetHealth();
+        PlayerHealth = Player.GetHealthPercentage();
 
         Player.OnHealthChange += TrackPlayerHealth;
 

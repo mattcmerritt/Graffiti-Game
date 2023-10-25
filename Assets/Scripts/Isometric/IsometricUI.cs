@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IsometricUI : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> Lives;
+    [SerializeField] private Image HealthBar;
 
     private void Start()
     {
@@ -13,10 +14,7 @@ public class IsometricUI : MonoBehaviour
 
     private void UpdateHealthIndicator(float newHealth)
     {
-        int lives = Mathf.RoundToInt(newHealth);
-        for (int i = 0; i < Lives.Count; i++)
-        {
-            Lives[i].SetActive(i < lives);
-        }
+        float lives = newHealth;
+        HealthBar.fillAmount = newHealth;
     }
 }

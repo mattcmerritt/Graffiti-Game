@@ -8,6 +8,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
     // Components and variables
     [SerializeField] private GameObject Player;
     [SerializeField] private Rigidbody Rigidbody;
+    [SerializeField] private float DamageDealt = 35f; 
 
     // State information for enemy attacks
     [SerializeField] private bool Preparing, Charging, Retreating;
@@ -124,7 +125,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
             // If the player is not dashing and the enemy charges at them, it hurts the player
             else if (Charging && !playerDashing)
             {
-                player.HurtPlayer();
+                player.HurtPlayer(DamageDealt);
             }
         }
     }

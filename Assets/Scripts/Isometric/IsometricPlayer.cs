@@ -8,7 +8,7 @@ public class IsometricPlayer : MonoBehaviour
     // Components and variables
     [SerializeField, Range(0, 50)] private float MoveSpeed = 5f, DashForce;
     [SerializeField] private Rigidbody Rigidbody;
-    [SerializeField] private int Health = 3;
+    [SerializeField] private float Health = 100, MaxHealth = 100;
     private bool IsCombatEncounter;
     private Vector3 Direction;
 
@@ -159,22 +159,22 @@ public class IsometricPlayer : MonoBehaviour
         return DashActive;
     }
 
-    public void HurtPlayer()
+    public void HurtPlayer(float healthLost)
     {
         if (!HitRecently)
         {
             HitRecently = true;
             HitDelay = MaxHitDelay;
             SpriteRenderer.color = new Color(1, 0.5f, 0);
-            Health--;
+            Health -= healthLost;
 
-            OnHealthChange?.Invoke(Health);
+            OnHealthChange?.Invoke(GetHealthPercentage());
         }
     }
 
-    public int GetHealth()
+    public float GetHealthPercentage()
     {
-        return Health;
+        return Health / MaxHealth; 
     }
 
     private float CalculateRotation()
