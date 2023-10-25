@@ -514,6 +514,8 @@ MonoBehaviour:
   ImmobileColor: {r: 1, g: 0, b: 0, a: 1}
   RespawnMessage: {fileID: 2556289048087785423}
   OutOfBoundsTimer: 3
+  DoubleJumpObtained: 1
+  DoubleJumpUsed: 0
 --- !u!1 &8272659811672203257
 GameObject:
   m_ObjectHideFlags: 0
