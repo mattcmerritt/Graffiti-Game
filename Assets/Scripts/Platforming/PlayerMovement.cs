@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject RespawnMessage;
     [SerializeField] private float OutOfBoundsTimer;
     private float TimeSpentOutOfBounds;
+    [SerializeField] private bool DoubleJumpObtained;
+    [SerializeField] private bool DoubleJumpUsed;
 
     private void OnEnable() 
     {
@@ -133,6 +135,19 @@ public class PlayerMovement : MonoBehaviour
             {
                 Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
             }
+            // double jump with space
+            else if(DoubleJumpObtained && Input.GetKeyDown(KeyCode.Space) && !DoubleJumpUsed)
+            {
+                DoubleJumpUsed = true;
+                Rb.velocity = Vector3.zero; // reset momentum so the player actually gets some jumping force
+                Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
+            }
+        }
+
+        // double jump reset on touching ground
+        if(DoubleJumpUsed && GroundCheck.CheckIfGrounded())
+        {
+            DoubleJumpUsed = false;
         }
 
         // respawn player if R is pressed
@@ -242,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
             foreach (GameObject respawn in respawnObjects)
             {
                 float distFromRespawn = Vector3.Distance(transform.position, respawn.transform.position);
-                if(distFromRespawn < minDistanceFromRespawn)
+                if(distFromRespawn < minDistanceFromRespawn && respawn.GetComponent<RespawnPoint>().CheckIfActivated())
                 {
                     closestRespawn = respawn;
                     minDistanceFromRespawn = distFromRespawn;
