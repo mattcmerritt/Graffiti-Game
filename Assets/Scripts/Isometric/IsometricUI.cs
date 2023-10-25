@@ -26,11 +26,11 @@ public class IsometricUI : MonoBehaviour
 
         if (lives <= 0)
         {
-            Transitioner.ReturnToCity(false);
+            StartCoroutine(Transitioner.ReturnToCity(false));
         }            
         else if (Enemies.Length == 0)
         {
-            Transitioner.ReturnToCity(true);
+            StartCoroutine(Transitioner.ReturnToCity(true));
         }
     }
 }

@@ -121,13 +121,17 @@ MonoBehaviour:
   Rigidbody: {fileID: 6871808157106505995}
   Preparing: 0
   Charging: 0
+  Retreating: 0
   PrepDuration: 0.5
-  CurrentPrepTimer: 0
   ChargeDuration: 0.25
+  RetreatDuration: 1.5
+  CurrentPrepTimer: 0
   CurrentChargeTimer: 0
+  CurrentRetreatTimer: 0
   ChargeDirection: {x: 0, y: 0, z: 0}
   MoveSpeed: 5
   ChargeSpeed: 20
+  RetreatSpeed: 3
 --- !u!1 &7286727408207545601
 GameObject:
   m_ObjectHideFlags: 0
