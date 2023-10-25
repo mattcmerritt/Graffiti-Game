@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2322819642318247586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7507056541721912560}
+  - component: {fileID: 5540790986751025139}
+  m_Layer: 0
+  m_Name: Interact
+  m_TagString: Player Hitbox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7507056541721912560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322819642318247586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6732262728383982963}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!136 &5540790986751025139
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322819642318247586}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &2607409835208828409
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2950463950898903951}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.65328145, y: 0.2705982, z: -0.2705982, w: -0.65328145}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 0}
   m_ConstrainProportionsScale: 0
@@ -201,7 +256,7 @@ Transform:
   - {fileID: 1687378387869785817}
   - {fileID: 5914264433519223428}
   m_Father: {fileID: 6732262728383982963}
-  m_LocalEulerAnglesHint: {x: 90, y: 315, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &4642255952395530352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -342,6 +397,7 @@ Transform:
   m_Children:
   - {fileID: 2067941107831339419}
   - {fileID: 5224548076590324673}
+  - {fileID: 7507056541721912560}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!65 &2427285337657313741
@@ -408,6 +464,9 @@ MonoBehaviour:
   DashForce: 20
   Rigidbody: {fileID: 5485539355407836792}
   Lives: 3
+  IsNonCombatEncounter: 0
+  Direction: {x: 0, y: 0, z: 0}
+  AttackActive: 0
   DashEnabled: 1
   DashAvailable: 1
   DashActive: 0
@@ -419,10 +478,9 @@ MonoBehaviour:
   MaxHitDelay: 1
   HitRecently: 0
   AttackVisual: {fileID: 2950463950898903951}
-  Direction: {x: 0, y: 0, z: 0}
-  Rotation: 0
-  AttackActive: 0
   AttackDuration: 0
   MaxAttackDuration: 0.5
+  InteractCollider: {fileID: 2322819642318247586}
+  InteractionActive: 0
   SpriteRenderer: {fileID: 3223796879788354555}
   CorrectionRatio: {x: 0.85, y: 1.15, z: 0}
