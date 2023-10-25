@@ -24,6 +24,30 @@ public class SceneTransitioner : MonoBehaviour
         ActivatedRespawnPoints = new List<string>();
     }
 
+    public void StartGame()
+    {
+        StartCoroutine(StartGameTransition());
+    }
+
+    public IEnumerator StartGameTransition()
+    {
+        if (!TransitionActive)
+        {
+            TransitionActive = true;
+            string debugOutput = "<color=green>Transitioner: </color>\nBEFORE:Current: " + CurrentScene + " Previous: " + PreviousScene;
+            Animator.SetTrigger("Enter Stage (Good)");
+            yield return new WaitForSeconds(TransitionDuration);
+            SceneManager.LoadScene(CurrentScene);
+            Debug.Log("<color=green>Transitioner: </color> Midway through Initial transition.");
+            Animator.SetTrigger("Leave Stage (Good)");
+            // yield return new WaitForSeconds(TransitionDuration);
+            Debug.Log("<color=green>Transitioner: </color> Finished Initial transition.");
+            debugOutput += "\n\nAFTER: Current: " + CurrentScene + " Previous: " + PreviousScene;
+            Debug.Log(debugOutput);
+            TransitionActive = false;
+        }
+    }
+
     public IEnumerator LoadEncounter(string encounterName)
     {
         if (!TransitionActive)
