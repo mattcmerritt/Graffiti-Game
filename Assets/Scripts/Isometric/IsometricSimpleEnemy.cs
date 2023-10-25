@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class IsometricSimpleEnemy : MonoBehaviour
     [SerializeField] private float CurrentPrepTimer, CurrentChargeTimer, CurrentRetreatTimer;
     [SerializeField] private Vector3 ChargeDirection;
     [SerializeField] private float MoveSpeed, ChargeSpeed, RetreatSpeed;
+
+    // Actions to share information with dependent elements like the stage manager
+    public event Action<IsometricSimpleEnemy> OnDefeat;
 
     private void Start()
     {
@@ -73,7 +77,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
         // If the player swing hits an enemy, it dies
         if (other.CompareTag("Player Hitbox"))
         {
-            Destroy(gameObject);
+            DefeatEnemy();
         }
         if (other.GetComponent<IsometricPlayer>() != null)
         {
@@ -115,7 +119,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
             // If the player was dashing, the enemy is defeated
             if (playerDashing)
             {
-                Destroy(gameObject);
+                DefeatEnemy();
             }
             // If the player is not dashing and the enemy charges at them, it hurts the player
             else if (Charging && !playerDashing)
@@ -129,5 +133,11 @@ public class IsometricSimpleEnemy : MonoBehaviour
     {
         Preparing = true;
         CurrentPrepTimer = 0;
+    }
+
+    private void DefeatEnemy()
+    {
+        OnDefeat?.Invoke(this);
+        Destroy(gameObject);
     }
 }

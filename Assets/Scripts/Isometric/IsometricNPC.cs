@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class IsometricNPC : MonoBehaviour
 {
     [SerializeField] private bool InteractTriggerHit;
     [SerializeField] private Collider PreviousInteractor;
+
+    public event Action<IsometricNPC> OnConversationComplete;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,5 +40,13 @@ public class IsometricNPC : MonoBehaviour
     private void Interact()
     {
         Debug.Log($"<color=yellow>Interactions: </color>{gameObject.name} NPC interacted with.");
+
+        // TODO: move to a separate part of the program after the dialogue is completed
+        CompleteInteraction();
+    }
+
+    private void CompleteInteraction()
+    {
+        OnConversationComplete?.Invoke(this);
     }
 }

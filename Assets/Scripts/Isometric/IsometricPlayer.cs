@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,31 +8,43 @@ public class IsometricPlayer : MonoBehaviour
     // Components and variables
     [SerializeField, Range(0, 50)] private float MoveSpeed = 5f, DashForce;
     [SerializeField] private Rigidbody Rigidbody;
-    [SerializeField] private int Lives = 3;
-    [SerializeField] private bool IsNonCombatEncounter;
-    [SerializeField] private Vector3 Direction;
-    [SerializeField] private bool AttackActive;
+    [SerializeField] private int Health = 3;
+    private bool IsCombatEncounter;
+    private Vector3 Direction;
 
     // Internal dash state tracking information
-    [SerializeField] private bool DashEnabled, DashAvailable, DashActive;
-    [SerializeField] private float DashCooldown, DashDuration;
+    [SerializeField] private bool DashEnabled;
+    private bool DashAvailable, DashActive;
+    private float DashCooldown, DashDuration;
     [SerializeField] private float MaxDashCooldown, MaxDashDuration;
 
     // Information related to hitstun and invincibility
-    [SerializeField] private float HitDelay, MaxHitDelay;
-    [SerializeField] private bool HitRecently;
+    private float HitDelay;
+    [SerializeField] private float MaxHitDelay;
+    private bool HitRecently;
 
     // Attack state information
+    private bool AttackActive;
     [SerializeField] private GameObject AttackVisual;
-    [SerializeField] private float AttackDuration, MaxAttackDuration;
+    private float AttackDuration;
+    [SerializeField] private float MaxAttackDuration;
 
     // Interaction detection boxes
     [SerializeField] private GameObject InteractCollider;
-    [SerializeField] private bool InteractionActive;
+    private bool InteractionActive;
 
     // Debug, change player color to reflect state
     [SerializeField] private SpriteRenderer SpriteRenderer;
     [SerializeField] private Vector3 CorrectionRatio;
+
+    // Event data so that other classes can determine when the player health has changed
+    public event Action<float> OnHealthChange;
+
+    // Load encounter specific information from the level data
+    private void Start()
+    {
+        IsCombatEncounter = IsometricEncounter.Instance.CheckIsCombatEncounter();
+    }
 
     private void Update()
     {
@@ -97,7 +110,7 @@ public class IsometricPlayer : MonoBehaviour
 
         Direction = new Vector3(horizontalInput, verticalInput, 0f);
         // Simple attack animation
-        if (Input.GetKeyDown(KeyCode.Space) && !IsNonCombatEncounter)
+        if (Input.GetKeyDown(KeyCode.Space) && IsCombatEncounter)
         {
             float rotation = CalculateRotation();
             AttackVisual.transform.eulerAngles = new Vector3(90f, rotation, 0f);
@@ -118,13 +131,13 @@ public class IsometricPlayer : MonoBehaviour
         }
 
         // If the player is not in a combat stage, space becomes interact instead of attack
-        if (Input.GetKey(KeyCode.Space) && IsNonCombatEncounter)
+        if (Input.GetKey(KeyCode.Space) && !IsCombatEncounter)
         {
             float rotation = CalculateRotation();
             InteractCollider.transform.eulerAngles = new Vector3(90f, rotation, 0f);
             InteractCollider.SetActive(true);
         }
-        else if (Input.GetKeyUp(KeyCode.Space) && IsNonCombatEncounter)
+        else if (Input.GetKeyUp(KeyCode.Space) && !IsCombatEncounter)
         {
             InteractCollider.SetActive(false);
         }
@@ -153,13 +166,15 @@ public class IsometricPlayer : MonoBehaviour
             HitRecently = true;
             HitDelay = MaxHitDelay;
             SpriteRenderer.color = new Color(1, 0.5f, 0);
-            Lives--;
+            Health--;
+
+            OnHealthChange?.Invoke(Health);
         }
     }
 
-    public int GetLives()
+    public int GetHealth()
     {
-        return Lives;
+        return Health;
     }
 
     private float CalculateRotation()
