@@ -8,6 +8,9 @@ public class IsometricPlayer : MonoBehaviour
     [SerializeField, Range(0, 50)] private float MoveSpeed = 5f, DashForce;
     [SerializeField] private Rigidbody Rigidbody;
     [SerializeField] private int Lives = 3;
+    [SerializeField] private bool IsNonCombatEncounter;
+    [SerializeField] private Vector3 Direction;
+    [SerializeField] private bool AttackActive;
 
     // Internal dash state tracking information
     [SerializeField] private bool DashEnabled, DashAvailable, DashActive;
@@ -20,9 +23,11 @@ public class IsometricPlayer : MonoBehaviour
 
     // Attack state information
     [SerializeField] private GameObject AttackVisual;
-    [SerializeField] private Vector3 Direction;
-    [SerializeField] private bool AttackActive;
     [SerializeField] private float AttackDuration, MaxAttackDuration;
+
+    // Interaction detection boxes
+    [SerializeField] private GameObject InteractCollider;
+    [SerializeField] private bool InteractionActive;
 
     // Debug, change player color to reflect state
     [SerializeField] private SpriteRenderer SpriteRenderer;
@@ -92,49 +97,9 @@ public class IsometricPlayer : MonoBehaviour
 
         Direction = new Vector3(horizontalInput, verticalInput, 0f);
         // Simple attack animation
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !IsNonCombatEncounter)
         {
-            // TODO: Reimplement with a function
-            Vector3 NE = Vector3.right + Vector3.up;
-            Vector3 NW = Vector3.left + Vector3.up;
-            Vector3 SE = Vector3.right + Vector3.down;
-            Vector3 SW = Vector3.left + Vector3.down;
-            float rotation = 0f;
-
-            if (Direction == NW)
-            {
-                rotation = 0;
-            }
-            else if (Direction == Vector3.up)
-            {
-                rotation = 45;
-            }
-            else if (Direction == NE)
-            {
-                rotation = 90;
-            }
-            else if (Direction == Vector3.right)
-            {
-                rotation = 135;
-            }
-            else if (Direction == SE)
-            {
-                rotation = 180;
-            }
-            else if (Direction == Vector3.down)
-            {
-                rotation = 225;
-            }
-            else if (Direction == SW)
-            {
-                rotation = 270;
-            }
-            else if (Direction == Vector3.left)
-            {
-                rotation = 315;
-            }
-            
-            
+            float rotation = CalculateRotation();
             AttackVisual.transform.eulerAngles = new Vector3(90f, rotation, 0f);
             AttackActive = true;
             AttackDuration = 0f;
@@ -150,6 +115,18 @@ public class IsometricPlayer : MonoBehaviour
                 AttackActive = false;
                 AttackVisual.SetActive(false);
             }
+        }
+
+        // If the player is not in a combat stage, space becomes interact instead of attack
+        if (Input.GetKey(KeyCode.Space) && IsNonCombatEncounter)
+        {
+            float rotation = CalculateRotation();
+            InteractCollider.transform.eulerAngles = new Vector3(90f, rotation, 0f);
+            InteractCollider.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.Space) && IsNonCombatEncounter)
+        {
+            InteractCollider.SetActive(false);
         }
     }
 
@@ -183,5 +160,48 @@ public class IsometricPlayer : MonoBehaviour
     public int GetLives()
     {
         return Lives;
+    }
+
+    private float CalculateRotation()
+    {
+        Vector3 NE = Vector3.right + Vector3.up;
+        Vector3 NW = Vector3.left + Vector3.up;
+        Vector3 SE = Vector3.right + Vector3.down;
+        Vector3 SW = Vector3.left + Vector3.down;
+        float rotation = 0f;
+
+        if (Direction == NW)
+        {
+            rotation = 0;
+        }
+        else if (Direction == Vector3.up)
+        {
+            rotation = 45;
+        }
+        else if (Direction == NE)
+        {
+            rotation = 90;
+        }
+        else if (Direction == Vector3.right)
+        {
+            rotation = 135;
+        }
+        else if (Direction == SE)
+        {
+            rotation = 180;
+        }
+        else if (Direction == Vector3.down)
+        {
+            rotation = 225;
+        }
+        else if (Direction == SW)
+        {
+            rotation = 270;
+        }
+        else if (Direction == Vector3.left)
+        {
+            rotation = 315;
+        }
+        return rotation;
     }
 }
