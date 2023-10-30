@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // check for dash
-        if(Input.GetKey(KeyCode.LeftShift) && CurrentDashCooldown <= 0 && intersectedPlanes.Count > 0) 
+        if((Input.GetKey(KeyCode.LeftShift) || (Input.GetKey(KeyCode.Z))) && CurrentDashCooldown <= 0 && intersectedPlanes.Count > 0) 
         {
             Dash.Invoke();
         }
