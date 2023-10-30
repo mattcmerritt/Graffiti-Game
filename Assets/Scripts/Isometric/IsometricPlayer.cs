@@ -40,106 +40,120 @@ public class IsometricPlayer : MonoBehaviour
     // Event data so that other classes can determine when the player health has changed
     public event Action<float> OnHealthChange;
 
+    // Data for pausing all input and movement when paused
+    private bool Paused;
+    private Vector3 PreviousVelocity;
+
     // Load encounter specific information from the level data
     private void Start()
     {
         IsCombatEncounter = IsometricEncounter.Instance.CheckIsCombatEncounter();
+
+        IsometricEncounter.Instance.OnPause += Pause;
+        IsometricEncounter.Instance.OnResume += Resume;
     }
 
     private void Update()
     {
-        // Movement input vectors
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-        Vector3 normalizedInput = Vector3.Normalize(new Vector3(horizontalInput, verticalInput, 0));
-        Vector3 input = normalizedInput.x * new Vector3(1, 0, -1) * CorrectionRatio.x + normalizedInput.y * new Vector3(1, 0, 1) * CorrectionRatio.y;
-
-        // Dash functionality
-        if (DashEnabled && DashAvailable && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.Z)))
+        if (!Paused)
         {
-            // Debug.Log("Dashed!");
-            SpriteRenderer.color = Color.green;
-            Rigidbody.velocity = DashForce * input;
-            DashActive = true; // activate the dash state
-            DashAvailable = false; // start cooldown
-            DashCooldown = 0f;
-            DashDuration = 0f;
-        }
-        
-        // Dash cooldown management
-        if (!DashActive)
-        {
-            // If not currently dashing, allow player to move freely
-            Rigidbody.velocity = input * MoveSpeed;
+            // Movement input vectors
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+            Vector3 normalizedInput = Vector3.Normalize(new Vector3(horizontalInput, verticalInput, 0));
+            Vector3 input = normalizedInput.x * new Vector3(1, 0, -1) * CorrectionRatio.x + normalizedInput.y * new Vector3(1, 0, 1) * CorrectionRatio.y;
 
-            // Additionally, if the dash in on cooldown, track this
-            if (!DashAvailable)
+            // Dash functionality
+            if (DashEnabled && DashAvailable && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.Z)))
             {
-                DashCooldown += Time.deltaTime;
-                if (DashCooldown >= MaxDashCooldown)
+                // Debug.Log("Dashed!");
+                SpriteRenderer.color = Color.green;
+                Rigidbody.velocity = DashForce * input;
+                DashActive = true; // activate the dash state
+                DashAvailable = false; // start cooldown
+                DashCooldown = 0f;
+                DashDuration = 0f;
+            }
+
+            // Dash cooldown management
+            if (!DashActive)
+            {
+                // If not currently dashing, allow player to move freely
+                Rigidbody.velocity = input * MoveSpeed;
+
+                // Additionally, if the dash in on cooldown, track this
+                if (!DashAvailable)
                 {
-                    // Debug.Log("Dash cooldown is over!");
-                    SpriteRenderer.color = Color.black;
-                    DashAvailable = true;
+                    DashCooldown += Time.deltaTime;
+                    if (DashCooldown >= MaxDashCooldown)
+                    {
+                        // Debug.Log("Dash cooldown is over!");
+                        SpriteRenderer.color = Color.black;
+                        DashAvailable = true;
+                    }
                 }
             }
-        }
+            else
+            {
+                // Otherwise, track the dash duration and keep the player's speed constant
+                DashDuration += Time.deltaTime;
+                if (DashDuration >= MaxDashDuration)
+                {
+                    // Debug.Log("Dash is over!");
+                    SpriteRenderer.color = Color.blue;
+                    DashActive = false;
+                }
+            }
+
+            // Health management and hitstun/i-frames
+            if (HitRecently)
+            {
+                HitDelay -= Time.deltaTime;
+                if (HitDelay <= 0f)
+                {
+                    HitDelay = 0f;
+                    SpriteRenderer.color = Color.black;
+                    HitRecently = false;
+                }
+            }
+
+            Direction = new Vector3(horizontalInput, verticalInput, 0f);
+            // Simple attack animation
+            if (Input.GetKeyDown(KeyCode.Space) && IsCombatEncounter)
+            {
+                float rotation = CalculateRotation();
+                AttackVisual.transform.eulerAngles = new Vector3(90f, rotation, 0f);
+                AttackActive = true;
+                AttackDuration = 0f;
+                AttackVisual.SetActive(true);
+            }
+
+            // Attack disappears after duration
+            if (AttackActive)
+            {
+                AttackDuration += Time.deltaTime;
+                if (AttackDuration >= MaxAttackDuration)
+                {
+                    AttackActive = false;
+                    AttackVisual.SetActive(false);
+                }
+            }
+
+            // If the player is not in a combat stage, space becomes interact instead of attack
+            if (Input.GetKey(KeyCode.Space) && !IsCombatEncounter)
+            {
+                float rotation = CalculateRotation();
+                InteractCollider.transform.eulerAngles = new Vector3(90f, rotation, 0f);
+                InteractCollider.SetActive(true);
+            }
+            else if (Input.GetKeyUp(KeyCode.Space) && !IsCombatEncounter)
+            {
+                InteractCollider.SetActive(false);
+            }
+        } 
         else
         {
-            // Otherwise, track the dash duration and keep the player's speed constant
-            DashDuration += Time.deltaTime;
-            if (DashDuration >= MaxDashDuration)
-            {
-                // Debug.Log("Dash is over!");
-                SpriteRenderer.color = Color.blue;
-                DashActive = false;
-            }
-        }
-
-        // Health management and hitstun/i-frames
-        if (HitRecently)
-        {
-            HitDelay -= Time.deltaTime;
-            if (HitDelay <= 0f)
-            {
-                HitDelay = 0f;
-                SpriteRenderer.color = Color.black;
-                HitRecently = false;
-            }
-        }
-
-        Direction = new Vector3(horizontalInput, verticalInput, 0f);
-        // Simple attack animation
-        if (Input.GetKeyDown(KeyCode.Space) && IsCombatEncounter)
-        {
-            float rotation = CalculateRotation();
-            AttackVisual.transform.eulerAngles = new Vector3(90f, rotation, 0f);
-            AttackActive = true;
-            AttackDuration = 0f;
-            AttackVisual.SetActive(true);
-        }
-
-        // Attack disappears after duration
-        if (AttackActive)
-        {
-            AttackDuration += Time.deltaTime;
-            if (AttackDuration >= MaxAttackDuration)
-            {
-                AttackActive = false;
-                AttackVisual.SetActive(false);
-            }
-        }
-
-        // If the player is not in a combat stage, space becomes interact instead of attack
-        if (Input.GetKey(KeyCode.Space) && !IsCombatEncounter)
-        {
-            float rotation = CalculateRotation();
-            InteractCollider.transform.eulerAngles = new Vector3(90f, rotation, 0f);
-            InteractCollider.SetActive(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Space) && !IsCombatEncounter)
-        {
-            InteractCollider.SetActive(false);
+            Rigidbody.velocity = Vector3.zero;
         }
     }
 
@@ -218,5 +232,17 @@ public class IsometricPlayer : MonoBehaviour
             rotation = 315;
         }
         return rotation;
+    }
+
+    private void Pause()
+    {
+        Paused = true;
+        PreviousVelocity = Rigidbody.velocity;
+    }
+
+    private void Resume()
+    {
+        Paused = false;
+        Rigidbody.velocity = PreviousVelocity;
     }
 }

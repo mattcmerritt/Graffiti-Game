@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class IsometricSimpleEnemy : MonoBehaviour
@@ -20,55 +21,69 @@ public class IsometricSimpleEnemy : MonoBehaviour
     // Actions to share information with dependent elements like the stage manager
     public event Action<IsometricSimpleEnemy> OnDefeat;
 
+    // Data for pausing all input and movement when paused
+    private bool Paused;
+    private Vector3 PreviousVelocity;
+
     private void Start()
     {
         Player = FindObjectOfType<IsometricPlayer>().gameObject;
+
+        IsometricEncounter.Instance.OnPause += Pause;
+        IsometricEncounter.Instance.OnResume += Resume;
     }
 
     private void Update()
     {
-        // If preparing a charge, sit still until the duration is over, then charge.
-        if (Preparing)
+        if (!Paused)
         {
-            CurrentPrepTimer += Time.deltaTime;
-            if (CurrentPrepTimer >= PrepDuration)
+            // If preparing a charge, sit still until the duration is over, then charge.
+            if (Preparing)
             {
-                Preparing = false;
-                Charging = true;
+                CurrentPrepTimer += Time.deltaTime;
+                if (CurrentPrepTimer >= PrepDuration)
+                {
+                    Preparing = false;
+                    Charging = true;
 
-                ChargeDirection = (Player.transform.position - transform.position).normalized;
-                Rigidbody.velocity = ChargeDirection * ChargeSpeed;
+                    ChargeDirection = (Player.transform.position - transform.position).normalized;
+                    Rigidbody.velocity = ChargeDirection * ChargeSpeed;
+                }
             }
-        }
-        // If charging, keep track of how long the charge has been going for and start retreating at end
-        else if (Charging)
-        {
-            CurrentChargeTimer += Time.deltaTime;
-            if (CurrentChargeTimer >= ChargeDuration)
+            // If charging, keep track of how long the charge has been going for and start retreating at end
+            else if (Charging)
             {
-                Charging = false;
-                Retreating = true;
+                CurrentChargeTimer += Time.deltaTime;
+                if (CurrentChargeTimer >= ChargeDuration)
+                {
+                    Charging = false;
+                    Retreating = true;
 
-                CurrentChargeTimer = 0;
+                    CurrentChargeTimer = 0;
+                }
             }
-        }
-        // If retreating, run away from the player for a bit
-        else if (Retreating)
-        {
-            CurrentRetreatTimer += Time.deltaTime;
-            Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
-            Rigidbody.velocity = directionToPlayer * RetreatSpeed * -1;
-            if (CurrentRetreatTimer >= RetreatDuration)
+            // If retreating, run away from the player for a bit
+            else if (Retreating)
             {
-                Retreating = false;
-                CurrentRetreatTimer = 0;
+                CurrentRetreatTimer += Time.deltaTime;
+                Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
+                Rigidbody.velocity = directionToPlayer * RetreatSpeed * -1;
+                if (CurrentRetreatTimer >= RetreatDuration)
+                {
+                    Retreating = false;
+                    CurrentRetreatTimer = 0;
+                }
+            }
+            // Otherwise, keep trying to get close to the player
+            else
+            {
+                Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
+                Rigidbody.velocity = directionToPlayer * MoveSpeed;
             }
         }
-        // Otherwise, keep trying to get close to the player
         else
         {
-            Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
-            Rigidbody.velocity = directionToPlayer * MoveSpeed;
+            Rigidbody.velocity = Vector3.zero;
         }
     }
 
@@ -140,5 +155,17 @@ public class IsometricSimpleEnemy : MonoBehaviour
     {
         OnDefeat?.Invoke(this);
         Destroy(gameObject);
+    }
+
+    private void Pause()
+    {
+        Paused = true;
+        PreviousVelocity = Rigidbody.velocity;
+    }
+
+    private void Resume()
+    {
+        Paused = false;
+        Rigidbody.velocity = PreviousVelocity;
     }
 }
