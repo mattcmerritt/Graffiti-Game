@@ -135,8 +135,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
             }
-            // double jump with space
-            else if(DoubleJumpObtained && Input.GetKeyDown(KeyCode.Space) && !DoubleJumpUsed)
+            // double jump with space or w
+            else if(!GroundCheck.CheckIfGrounded() && DoubleJumpObtained && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !DoubleJumpUsed)
             {
                 DoubleJumpUsed = true;
                 Rb.velocity = Vector3.zero; // reset momentum so the player actually gets some jumping force
