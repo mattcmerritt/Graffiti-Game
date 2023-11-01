@@ -21,6 +21,7 @@ public class DialogueUI : MonoBehaviour
 
     // Events that can be attached to for detecting conversation completion
     public event Action OnConversationOver;
+    public event Action OnConversationStart;
 
     private void Update()
     {
@@ -52,6 +53,8 @@ public class DialogueUI : MonoBehaviour
         // Set the current DialogueLine to the one passed in
         CurrentLine = firstLine;
         DisplayCurrentLine();
+
+        OnConversationStart?.Invoke();
 
         ConversationActive = true;
     }

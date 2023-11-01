@@ -25,6 +25,10 @@ public class IsometricEncounter : MonoBehaviour
     public event Action<float> OnPlayerHealthChanged;
     public event Action<float> OnPlayerDash;
 
+    // Pause when conversation is active
+    private bool Paused;
+    public event Action OnPause, OnResume;
+
     // Configure singleton instance at earliest step
     private void Awake()
     {
@@ -55,6 +59,9 @@ public class IsometricEncounter : MonoBehaviour
             NPC.AttachToDialogueUI(Dialogue);
             NPC.OnConversationComplete += TrackNPCComplete;
         }
+
+        Dialogue.OnConversationStart += PauseGame;
+        Dialogue.OnConversationOver += ResumeGame;
     }
 
     private void Update()
@@ -72,6 +79,19 @@ public class IsometricEncounter : MonoBehaviour
         if (PlayerHealth <= 0)
         {
             StartCoroutine(Transitioner.ReturnToCity(false));
+        }
+
+        // Debug Pausing
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Paused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
         }
     }
 
@@ -103,5 +123,17 @@ public class IsometricEncounter : MonoBehaviour
     {
         Debug.Log($"<color=red>Encounter Progress: </color>Player dashed. Cooldown is {cooldown} seconds.");
         OnPlayerDash?.Invoke(cooldown);
+    }
+
+    private void PauseGame()
+    {
+        Paused = true;
+        OnPause?.Invoke();
+    }
+
+    private void ResumeGame()
+    {
+        Paused = false;
+        OnResume?.Invoke();
     }
 }
