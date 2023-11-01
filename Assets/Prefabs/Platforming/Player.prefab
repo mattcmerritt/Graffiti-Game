@@ -501,21 +501,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282cf4369e93d80478dd66ae1bf00b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rb: {fileID: 2375688685899185198}
+  DashObtained: 0
+  DoubleJumpObtained: 1
   TopHorizSpeed: 8
   JumpForce: 16
   DashForce: 16
   DashCooldown: 0.5
   DashDuration: 0.25
-  InitialGravity: 3
   PlayerColor: {r: 0, g: 0, b: 0, a: 1}
   CooldownColor: {r: 0, g: 0, b: 1, a: 1}
   DashBuddyColor: {r: 0, g: 1, b: 0, a: 1}
   ImmobileColor: {r: 1, g: 0, b: 0, a: 1}
-  RespawnMessage: {fileID: 2556289048087785423}
   OutOfBoundsTimer: 3
-  DoubleJumpObtained: 1
-  DoubleJumpUsed: 0
+  RespawnMessage: {fileID: 2556289048087785423}
 --- !u!1 &8272659811672203257
 GameObject:
   m_ObjectHideFlags: 0

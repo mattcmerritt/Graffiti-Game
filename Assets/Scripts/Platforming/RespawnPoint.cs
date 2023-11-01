@@ -36,7 +36,7 @@ public class RespawnPoint : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.GetComponent<PlayerMovement>() != null)
+        if(other.gameObject.GetComponent<PlatformingPlayer>() != null)
         {
             ActivateRespawnPoint();
             SceneTransitioner st = FindObjectOfType<SceneTransitioner>();

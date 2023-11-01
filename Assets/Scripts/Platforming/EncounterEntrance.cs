@@ -20,7 +20,7 @@ public class EncounterEntrance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerMovement>() != null)
+        if (other.GetComponent<PlatformingPlayer>() != null)
         {
             StartCoroutine(Transitioner.LoadEncounter(EncounterSceneName));
         }
