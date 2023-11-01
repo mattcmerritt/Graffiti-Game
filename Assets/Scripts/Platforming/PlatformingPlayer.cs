@@ -28,6 +28,8 @@ public class PlatformingPlayer : MonoBehaviour
     private float TimeSpentOutOfBounds;
     private bool DoubleJumpUsed;
     private bool Paused;
+    private Vector2 PreviousVelocity;
+    private float PreviousGravity;
 
     // player components
     private Rigidbody2D Rb;
@@ -61,6 +63,9 @@ public class PlatformingPlayer : MonoBehaviour
         InitialGravity = Rb.gravityScale; // set gravity to initial value
         RespawnMessage.SetActive(false);
         PlatformingLevel = PlatformingLevel.Instance;
+
+        PlatformingLevel.Instance.OnPause += Pause;
+        PlatformingLevel.Instance.OnResume += Resume;
     }
 
     private void Update() 
@@ -322,5 +327,24 @@ public class PlatformingPlayer : MonoBehaviour
             Debug.LogError("No respawn points found! Add objects with the RespawnPoint script.");
         }
         
+    }
+
+    private void Pause()
+    {
+        Paused = true;
+
+        PreviousVelocity = Rb.velocity;
+        PreviousGravity = Rb.gravityScale;
+
+        Rb.velocity = Vector2.zero;
+        Rb.gravityScale = 0f;
+    }
+
+    private void Resume()
+    {
+        Paused = false;
+
+        Rb.velocity = PreviousVelocity;
+        Rb.gravityScale = PreviousGravity;
     }
 }
