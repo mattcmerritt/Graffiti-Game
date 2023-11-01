@@ -305,20 +305,27 @@ public class PlatformingPlayer : MonoBehaviour
         }
         if(respawnObjects.Count > 0)
         {
-            GameObject closestRespawn = respawnObjects[0];
-            float minDistanceFromRespawn = Vector3.Distance(transform.position, closestRespawn.transform.position);
+            GameObject closestRespawn = null;
+            float minDistanceFromRespawn = Int32.MaxValue; // large so it will be overwritten 
             foreach (GameObject respawn in respawnObjects)
             {
                 float distFromRespawn = Vector3.Distance(transform.position, respawn.transform.position);
-                if(distFromRespawn < minDistanceFromRespawn && respawn.GetComponent<RespawnPoint>().CheckIfActivated())
+                if(respawn.GetComponent<RespawnPoint>().CheckIfActivated() && distFromRespawn < minDistanceFromRespawn)
                 {
                     closestRespawn = respawn;
                     minDistanceFromRespawn = distFromRespawn;
                 }
             }
-
-            transform.position = closestRespawn.transform.position;
-            RespawnMessage.SetActive(false);
+            
+            if(closestRespawn != null) 
+            {
+                transform.position = closestRespawn.transform.position;
+                RespawnMessage.SetActive(false);
+            }
+            else
+            {
+                Debug.LogError("ERROR: No active respawn points found to place the player.");
+            }
         }
         else 
         {
