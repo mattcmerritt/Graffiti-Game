@@ -23,6 +23,7 @@ public class IsometricEncounter : MonoBehaviour
 
     // Events that other classes can use to track changes without hunting for specific objects in scene
     public event Action<float> OnPlayerHealthChanged;
+    public event Action<float> OnPlayerDash;
 
     // Configure singleton instance at earliest step
     private void Awake()
@@ -42,6 +43,7 @@ public class IsometricEncounter : MonoBehaviour
         PlayerHealth = Player.GetHealthPercentage();
 
         Player.OnHealthChange += TrackPlayerHealth;
+        Player.OnDash += TrackPlayerDash;
 
         foreach (IsometricSimpleEnemy enemy in Enemies)
         {
@@ -95,5 +97,11 @@ public class IsometricEncounter : MonoBehaviour
     {
         FinishedConversation = true;
         Debug.Log($"<color=red>Encounter Progress: </color>Conversation with the NPC ({npc.name}) has concluded.");
+    }
+
+    private void TrackPlayerDash(float cooldown)
+    {
+        Debug.Log($"<color=red>Encounter Progress: </color>Player dashed. Cooldown is {cooldown} seconds.");
+        OnPlayerDash?.Invoke(cooldown);
     }
 }

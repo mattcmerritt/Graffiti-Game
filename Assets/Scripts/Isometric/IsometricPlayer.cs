@@ -40,6 +40,9 @@ public class IsometricPlayer : MonoBehaviour
     // Event data so that other classes can determine when the player health has changed
     public event Action<float> OnHealthChange;
 
+    // Events for tracking cooldowns, passes the cooldown duration
+    public event Action<float> OnDash;
+
     // Load encounter specific information from the level data
     private void Start()
     {
@@ -64,6 +67,7 @@ public class IsometricPlayer : MonoBehaviour
             DashAvailable = false; // start cooldown
             DashCooldown = 0f;
             DashDuration = 0f;
+            OnDash?.Invoke(MaxDashCooldown);
         }
         
         // Dash cooldown management
