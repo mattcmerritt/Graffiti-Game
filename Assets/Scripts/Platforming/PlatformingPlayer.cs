@@ -87,16 +87,16 @@ public class PlatformingPlayer : MonoBehaviour
                     DashDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
                 }
 
-                // check for jump inputs (W / up arrow handled in FixedUpdate)
+                // check for jump inputs
                 if(GroundCheck == null) 
                 {
                     Debug.LogError("The player has no GroundChecker to use. Please add one.");
                 }
-                else if(Input.GetKeyDown(KeyCode.Space) && GroundCheck.CheckIfGrounded())
+                else if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && GroundCheck.CheckIfGrounded())
                 {
                     Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
                 }
-                // double jump with space or w
+                // double jump
                 else if(!GroundCheck.CheckIfGrounded() && DoubleJumpObtained && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !DoubleJumpUsed)
                 {
                     OnDoubleJump?.Invoke();
@@ -160,16 +160,6 @@ public class PlatformingPlayer : MonoBehaviour
                 {
                     // stop on a dime
                     Rb.velocity = new Vector2(0, Rb.velocity.y);
-                }
-
-                // vertical controls when on a surface (space handled in Update)
-                if(GroundCheck == null) 
-                {
-                    Debug.LogError("The player has no GroundChecker to use. Please add one.");
-                }
-                else if(Input.GetAxisRaw("Vertical") > 0 && GroundCheck.CheckIfGrounded())
-                {
-                    Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
                 }
             }
         }
