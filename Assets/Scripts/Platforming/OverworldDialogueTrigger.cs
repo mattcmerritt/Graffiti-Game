@@ -10,11 +10,24 @@ public class OverworldDialogueTrigger : MonoBehaviour
     public event Action<DialogueLine> OnDialogueTriggered;
 
     [SerializeField] private bool SingleUse;
+    [SerializeField] private string DialogueTriggerName;
     private bool Used;
+
+    private SceneTransitioner Transitioner;
 
     private void Start()
     {
+        Transitioner = FindObjectOfType<SceneTransitioner>();
+
         OnDialogueTriggered += (DialogueLine line) => Complete();
+
+        Used = Transitioner != null && Transitioner.CheckIfDialogueCheckpointActivated(DialogueTriggerName);
+
+        if (Used && SingleUse)
+        {
+            Collider2D trigger = GetComponent<Collider2D>();
+            trigger.enabled = false;
+        } 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -28,6 +41,7 @@ public class OverworldDialogueTrigger : MonoBehaviour
     private void Complete()
     {
         Used = true;
+        Transitioner.AddActivatedDialogueCheckpoint(DialogueTriggerName);
 
         if (SingleUse)
         {

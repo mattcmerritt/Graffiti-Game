@@ -9,6 +9,7 @@ public class SceneTransitioner : MonoBehaviour
     [SerializeField] private bool CompletedLastEncounter;
     [SerializeField] private List<string> CompletedEncounters;
     [SerializeField] private List<string> ActivatedRespawnPoints;
+    [SerializeField] private List<string> ActivatedDialogueCheckpoints;
 
     // Transition animation details
     [SerializeField] private float TransitionDuration;
@@ -130,5 +131,18 @@ public class SceneTransitioner : MonoBehaviour
     public bool CheckIfRespawnActivated(string respawn)
     {
         return ActivatedRespawnPoints.Contains(respawn);
+    }
+
+    public void AddActivatedDialogueCheckpoint(string checkpoint)
+    {
+        if(!ActivatedDialogueCheckpoints.Contains(checkpoint))
+        {
+            ActivatedDialogueCheckpoints.Add(checkpoint);
+        }
+    }
+
+    public bool CheckIfDialogueCheckpointActivated(string checkpoint)
+    {
+        return ActivatedDialogueCheckpoints.Contains(checkpoint);
     }
 }
