@@ -12,6 +12,11 @@ public class OverworldDialogueTrigger : MonoBehaviour
     [SerializeField] private bool SingleUse;
     private bool Used;
 
+    private void Start()
+    {
+        OnDialogueTriggered += (DialogueLine line) => Complete();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<PlatformingPlayer>() != null)
@@ -20,7 +25,7 @@ public class OverworldDialogueTrigger : MonoBehaviour
         }
     }
 
-    public void Complete()
+    private void Complete()
     {
         Used = true;
 

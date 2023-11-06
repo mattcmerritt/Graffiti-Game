@@ -29,6 +29,9 @@ public class IsometricEncounter : MonoBehaviour
     private bool Paused;
     public event Action OnPause, OnResume;
 
+    // Initial Dialogue
+    [SerializeField] private DialogueLine InitialLine;
+
     // Configure singleton instance at earliest step
     private void Awake()
     {
@@ -62,6 +65,12 @@ public class IsometricEncounter : MonoBehaviour
 
         Dialogue.OnConversationStart += PauseGame;
         Dialogue.OnConversationOver += ResumeGame;
+
+        // starting the intro dialogue
+        if (InitialLine != null)
+        {
+            Dialogue.StartConversation(InitialLine);
+        }
     }
 
     private void Update()

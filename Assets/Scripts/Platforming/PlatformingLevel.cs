@@ -39,7 +39,6 @@ public class PlatformingLevel : MonoBehaviour
         {
             // trigger.OnDialogueTriggered += (DialogueLine line) => PauseGame(); // pause the game when trigger is hit
             trigger.OnDialogueTriggered += StartDialogue;
-            Dialogue.OnConversationOver += trigger.Complete;
         }
 
         Dialogue.OnConversationStart += PauseGame;
