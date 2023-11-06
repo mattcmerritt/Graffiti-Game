@@ -9,6 +9,9 @@ public class PlatformingLevel : MonoBehaviour
     private static PlatformingPlayer Player;
     private bool Paused;
 
+    private OverworldDialogueTrigger[] DialogueTriggers;
+    private DialogueUI Dialogue;
+
     public event Action<float> OnPlayerDash;
     public event Action OnPlayerDoubleJump;
     public event Action OnPlayerDoubleJumpRefresh;
@@ -24,10 +27,23 @@ public class PlatformingLevel : MonoBehaviour
     private void Start()
     {
         Player = FindObjectOfType<PlatformingPlayer>();
+        DialogueTriggers = FindObjectsOfType<OverworldDialogueTrigger>();
+        Dialogue = FindObjectOfType<DialogueUI>(true);
+
 
         Player.OnDash += TrackPlayerDash;
         Player.OnDoubleJump += TrackPlayerDoubleJump;
         Player.OnDoubleJumpRefresh += TrackPlayerDoubleJumpRefresh;
+
+        foreach (OverworldDialogueTrigger trigger in DialogueTriggers)
+        {
+            // trigger.OnDialogueTriggered += (DialogueLine line) => PauseGame(); // pause the game when trigger is hit
+            trigger.OnDialogueTriggered += StartDialogue;
+            Dialogue.OnConversationOver += trigger.Complete;
+        }
+
+        Dialogue.OnConversationStart += PauseGame;
+        Dialogue.OnConversationOver += ResumeGame;
     }
 
     private void Update()
@@ -74,5 +90,10 @@ public class PlatformingLevel : MonoBehaviour
     {
         Paused = false;
         OnResume?.Invoke();
+    }
+
+    private void StartDialogue(DialogueLine line)
+    {
+        Dialogue.StartConversation(line);
     }
 }
