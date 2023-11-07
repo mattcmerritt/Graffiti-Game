@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class PlatformingPlayer : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class PlatformingPlayer : MonoBehaviour
 
     // player components
     private Rigidbody2D Rb;
-    private GroundChecker GroundCheck;
+    [SerializeField] private GroundChecker GroundCheck;
     private SpriteRenderer Renderer;
     private PlaneChecker PlaneCheck;
     [SerializeField] private GameObject RespawnMessage; // TODO: maybe a better way to ddo this than in editor?
