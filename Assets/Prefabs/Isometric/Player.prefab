@@ -250,7 +250,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1687378387869785817}
@@ -463,24 +463,14 @@ MonoBehaviour:
   MoveSpeed: 5
   DashForce: 20
   Rigidbody: {fileID: 5485539355407836792}
-  Lives: 3
-  IsNonCombatEncounter: 0
-  Direction: {x: 0, y: 0, z: 0}
-  AttackActive: 0
+  Health: 100
+  MaxHealth: 100
   DashEnabled: 1
-  DashAvailable: 1
-  DashActive: 0
-  DashCooldown: 0
-  DashDuration: 0
   MaxDashCooldown: 0.5
   MaxDashDuration: 0.25
-  HitDelay: 0
   MaxHitDelay: 1
-  HitRecently: 0
   AttackVisual: {fileID: 2950463950898903951}
-  AttackDuration: 0
   MaxAttackDuration: 0.5
   InteractCollider: {fileID: 2322819642318247586}
-  InteractionActive: 0
   SpriteRenderer: {fileID: 3223796879788354555}
   CorrectionRatio: {x: 0.85, y: 1.15, z: 0}
