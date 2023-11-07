@@ -25,12 +25,19 @@ public class IsometricSimpleEnemy : MonoBehaviour
     private bool Paused;
     private Vector3 PreviousVelocity;
 
+    // Separate collider on a different layer that detects where the player is
+    [SerializeField] private EnemyProximityChecker ProximityChecker;
+
     private void Start()
     {
         Player = FindObjectOfType<IsometricPlayer>().gameObject;
 
         IsometricEncounter.Instance.OnPause += Pause;
         IsometricEncounter.Instance.OnResume += Resume;
+
+        ProximityChecker.OnTriggerEnterEvent += OnProximityTriggerEnter;
+        ProximityChecker.OnTriggerStayEvent += OnProximityTriggerStay;
+        ProximityChecker.OnTriggerExitEvent += OnProximityTriggerExit;
     }
 
     private void Update()
@@ -87,7 +94,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
         }
     }
 
-    // If close to player, begin preparing a charge.
+    // If the player hits the enemy with a slashing attack, it should be destroyed
     private void OnTriggerEnter(Collider other)
     {
         // If the player swing hits an enemy, it dies
@@ -95,6 +102,11 @@ public class IsometricSimpleEnemy : MonoBehaviour
         {
             DefeatEnemy();
         }
+    }
+
+    // If close to player, begin preparing a charge.
+    private void OnProximityTriggerEnter(Collider other)
+    {
         if (other.GetComponent<IsometricPlayer>() != null)
         {
             StartPreparing();
@@ -102,7 +114,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
     }
 
     // Allow enemies to re-aggro if they miss their charge but stay in the radius of the player.
-    private void OnTriggerStay(Collider other)
+    private void OnProximityTriggerStay(Collider other)
     {
         if (other.GetComponent<IsometricPlayer>() != null)
         {
@@ -114,7 +126,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
     }
 
     // If player gets too far, stop preparing a charge
-    private void OnTriggerExit(Collider other)
+    private void OnProximityTriggerExit(Collider other)
     {
         if (other.GetComponent<IsometricPlayer>() != null)
         {
