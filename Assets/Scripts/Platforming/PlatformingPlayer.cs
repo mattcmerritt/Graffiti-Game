@@ -315,6 +315,7 @@ public class PlatformingPlayer : MonoBehaviour
             if(closestRespawn != null) 
             {
                 transform.position = closestRespawn.transform.position;
+                Rb.velocity = Vector3.zero;
                 RespawnMessage.SetActive(false);
             }
             else
