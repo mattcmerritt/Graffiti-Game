@@ -399,8 +399,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: cac09fc695d9cdf4182a603dfa1989b7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
   DashForce: 16
   DashCooldown: 0.5
   DashDuration: 0.25
-  PlayerColor: {r: 0, g: 0, b: 0, a: 1}
+  PlayerColor: {r: 1, g: 1, b: 1, a: 1}
   CooldownColor: {r: 0, g: 0, b: 1, a: 1}
   DashBuddyColor: {r: 0, g: 1, b: 0, a: 1}
   ImmobileColor: {r: 1, g: 0, b: 0, a: 1}

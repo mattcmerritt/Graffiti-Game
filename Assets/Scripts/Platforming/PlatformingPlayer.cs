@@ -25,7 +25,7 @@ public class PlatformingPlayer : MonoBehaviour
     private float CurrentDashCooldown, CurrentDashDuration;
     private bool DashActive;
     private float InitialGravity;
-    private string DashDirection;
+    private string FacingDirection;
     private float TimeSpentOutOfBounds;
     private bool DoubleJumpUsed;
     private bool Paused;
@@ -90,7 +90,18 @@ public class PlatformingPlayer : MonoBehaviour
                 // update last direction moved in to store for dash
                 if(Input.GetAxisRaw("Horizontal") != 0)
                 {
-                    DashDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
+                    FacingDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
+                }
+
+                // set flip variable of player sprite
+                // TODO: assumes player sprite is facing right by default, if not need to fix
+                if(FacingDirection == "left")
+                {
+                    Renderer.flipX = true;
+                }
+                else
+                {
+                    Renderer.flipX = false;
                 }
 
                 // check for jump inputs
@@ -189,7 +200,7 @@ public class PlatformingPlayer : MonoBehaviour
         Rb.velocity = Vector2.zero;
 
         // determine dash direction
-        if(DashDirection == "left")
+        if(FacingDirection == "left")
         {
             Rb.AddForce(transform.right * -DashForce, ForceMode2D.Impulse);
         }
