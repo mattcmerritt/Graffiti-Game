@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6729254707454689722}
   - component: {fileID: 289016625134245660}
   - component: {fileID: 2163309917246912259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jump Platform
   m_TagString: Ground
   m_Icon: {fileID: 0}

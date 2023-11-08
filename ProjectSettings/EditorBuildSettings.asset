@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 457b8fdc324807642af08bd02378ff01
   - enabled: 1
+    path: Assets/Scenes/PlatformerSceneResize.unity
+    guid: c14f9b1e2aba8fb40ae0e538c3560f0a
+  - enabled: 1
     path: Assets/Scenes/3DIsometricBuddy.unity
     guid: bba5b28446839064a8a61ac2c671afe4
   - enabled: 1

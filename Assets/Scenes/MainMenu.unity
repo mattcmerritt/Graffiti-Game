@@ -227,11 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733dd9361a9636749bbf2d86eaed206a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PreviousScene: PlatformerScene
+  PreviousScene: PlatformerSceneResize
   CurrentScene: 3DIsometricBuddy
   CompletedLastEncounter: 0
   CompletedEncounters: []
   ActivatedRespawnPoints: []
+  ActivatedDialogueCheckpoints: []
   TransitionDuration: 1
   Animator: {fileID: 1054879163}
   TransitionActive: 0
