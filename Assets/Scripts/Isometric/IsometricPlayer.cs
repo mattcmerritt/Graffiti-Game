@@ -47,6 +47,9 @@ public class IsometricPlayer : MonoBehaviour
     // Events for tracking cooldowns, passes the cooldown duration
     public event Action<float> OnDash;
 
+    // Directional sprites
+    [SerializeField] private List<Sprite> DirectionalPlayerSprites;
+
     // Load encounter specific information from the level data
     private void Start()
     {
@@ -92,7 +95,7 @@ public class IsometricPlayer : MonoBehaviour
                     if (DashCooldown >= MaxDashCooldown)
                     {
                         // Debug.Log("Dash cooldown is over!");
-                        SpriteRenderer.color = Color.black;
+                        SpriteRenderer.color = Color.white;
                         DashAvailable = true;
                     }
                 }
@@ -116,16 +119,17 @@ public class IsometricPlayer : MonoBehaviour
                 if (HitDelay <= 0f)
                 {
                     HitDelay = 0f;
-                    SpriteRenderer.color = Color.black;
+                    SpriteRenderer.color = Color.white;
                     HitRecently = false;
                 }
             }
 
             Direction = new Vector3(horizontalInput, verticalInput, 0f);
+            float rotation = CalculateRotation();
+
             // Simple attack animation
             if (Input.GetKeyDown(KeyCode.Space) && IsCombatEncounter)
             {
-                float rotation = CalculateRotation();
                 AttackVisual.transform.eulerAngles = new Vector3(90f, rotation, 0f);
                 AttackActive = true;
                 AttackDuration = 0f;
@@ -146,7 +150,6 @@ public class IsometricPlayer : MonoBehaviour
             // If the player is not in a combat stage, space becomes interact instead of attack
             if (Input.GetKey(KeyCode.Space) && !IsCombatEncounter)
             {
-                float rotation = CalculateRotation();
                 InteractCollider.transform.eulerAngles = new Vector3(90f, rotation, 0f);
                 InteractCollider.SetActive(true);
             }
@@ -205,34 +208,42 @@ public class IsometricPlayer : MonoBehaviour
 
         if (Direction == NW)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[3];
             rotation = 0;
         }
         else if (Direction == Vector3.up)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[2];
             rotation = 45;
         }
         else if (Direction == NE)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[1];
             rotation = 90;
         }
         else if (Direction == Vector3.right)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[0];
             rotation = 135;
         }
         else if (Direction == SE)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[7];
             rotation = 180;
         }
         else if (Direction == Vector3.down)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[6];
             rotation = 225;
         }
         else if (Direction == SW)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[5];
             rotation = 270;
         }
         else if (Direction == Vector3.left)
         {
+            SpriteRenderer.sprite = DirectionalPlayerSprites[4];
             rotation = 315;
         }
         return rotation;

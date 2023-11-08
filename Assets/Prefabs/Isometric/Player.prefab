@@ -212,8 +212,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6f27159fa03181f46bba11a25070b302, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -474,3 +474,12 @@ MonoBehaviour:
   InteractCollider: {fileID: 2322819642318247586}
   SpriteRenderer: {fileID: 3223796879788354555}
   CorrectionRatio: {x: 0.85, y: 1.15, z: 0}
+  DirectionalPlayerSprites:
+  - {fileID: 21300000, guid: 6d24b116718c6cc42bcfa57a518a414a, type: 3}
+  - {fileID: 21300000, guid: 6384d9058dcded54fac196316c5bc712, type: 3}
+  - {fileID: 21300000, guid: 6f27159fa03181f46bba11a25070b302, type: 3}
+  - {fileID: 21300000, guid: 1782f3ea02662c945a7355790a0bd3ba, type: 3}
+  - {fileID: 21300000, guid: 0debd4d31ae6ba64593771e014e60496, type: 3}
+  - {fileID: 21300000, guid: 1175e7b46101ac440bf4b93b7187dbcb, type: 3}
+  - {fileID: 21300000, guid: 246cdff220529564b94b1bb1067e2c53, type: 3}
+  - {fileID: 21300000, guid: bf371d7088296a345be2043da00a00b4, type: 3}
