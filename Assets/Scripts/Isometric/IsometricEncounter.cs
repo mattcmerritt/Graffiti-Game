@@ -31,6 +31,7 @@ public class IsometricEncounter : MonoBehaviour
 
     // Initial Dialogue
     [SerializeField] private DialogueLine InitialLine;
+    private bool DialogueStarted;
 
     // Configure singleton instance at earliest step
     private void Awake()
@@ -65,16 +66,17 @@ public class IsometricEncounter : MonoBehaviour
 
         Dialogue.OnConversationStart += PauseGame;
         Dialogue.OnConversationOver += ResumeGame;
-
-        // starting the intro dialogue
-        if (InitialLine != null)
-        {
-            Dialogue.StartConversation(InitialLine);
-        }
     }
 
     private void Update()
     {
+        // initial loading and starting the intro dialogue
+        if (InitialLine != null && !DialogueStarted)
+        {
+            Dialogue.StartConversation(InitialLine);
+            DialogueStarted = true;
+        }
+
         if (IsCombatEncounter && RemainingEnemies <= 0)
         {
             StartCoroutine(Transitioner.ReturnToCity(true));
