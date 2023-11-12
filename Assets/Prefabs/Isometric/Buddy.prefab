@@ -98,6 +98,7 @@ MonoBehaviour:
   InteractTriggerHit: 0
   PreviousInteractor: {fileID: 0}
   StartingLine: {fileID: 11400000, guid: 08cae90ae7fa2d94694f2dfb541283e0, type: 2}
+  IsFirstBuddyEncounter: 1
 --- !u!1 &8357686253532353498
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,17 @@ public class IsometricNPC : MonoBehaviour
     private DialogueUI DialogueUI;
     [SerializeField] private DialogueLine StartingLine;
 
+    // Buddy types
+    private enum BuddyType
+    {
+        Jump,
+        Dash,
+    };
+
+    // Buddy spawning
+    [SerializeField] private bool IsFirstBuddyEncounter;
+    [SerializeField] private BuddyType NewBuddyType;
+
     private void OnTriggerEnter(Collider other)
     {
         // If NPC is intended to have multiple collision boxes, add && !InteractTriggerHit
@@ -62,5 +73,15 @@ public class IsometricNPC : MonoBehaviour
     {
         OnConversationComplete?.Invoke(this);
         ConversationCompleted = true;
+
+        switch (NewBuddyType)
+        {
+            case BuddyType.Jump:
+                BuddyManager.Instance.AddBuddy<DoubleJumpBuddy>();
+                break;
+            case BuddyType.Dash:
+                BuddyManager.Instance.AddBuddy<DoubleJumpBuddy>();
+                break;
+        }
     }
 }

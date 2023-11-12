@@ -3001,6 +3001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCombatEncounter: 0
+  InitialLine: {fileID: 0}
 --- !u!4 &946887828
 Transform:
   m_ObjectHideFlags: 0
