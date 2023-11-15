@@ -85,8 +85,8 @@ public class PlatformingPlayer : MonoBehaviour
                 if((Input.GetKey(KeyCode.LeftShift) || (Input.GetKey(KeyCode.Z))) && CurrentDashCooldown <= 0) 
                 {
                     // check for buddy and buddy cooldown
-                    DoubleJumpBuddy buddy = BuddyManager.Instance.GetBuddy<DoubleJumpBuddy>();
-                    if (buddy != null && buddy.CanDoubleJump())
+                    DashBuddy buddy = BuddyManager.Instance.GetBuddy<DashBuddy>();
+                    if (buddy != null && buddy.CanDash())
                     {
                         OnDash?.Invoke(DashCooldown);
                     }
