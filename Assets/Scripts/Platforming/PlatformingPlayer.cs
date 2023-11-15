@@ -110,22 +110,25 @@ public class PlatformingPlayer : MonoBehaviour
                 }
 
                 // check for jump inputs
-                if(GroundCheck == null) 
+                if(!DashActive)
                 {
-                    Debug.LogError("The player has no GroundChecker to use. Please add one.");
-                }
-                else if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && GroundCheck.CheckIfGrounded())
-                {
-                    Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
-                }
-                // double jump
-                else if(!GroundCheck.CheckIfGrounded() && DoubleJumpObtained && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !DoubleJumpUsed)
-                {
-                    // check for buddy and buddy cooldown
-                    DoubleJumpBuddy buddy = BuddyManager.Instance.GetBuddy<DoubleJumpBuddy>();
-                    if (buddy != null && buddy.CanDoubleJump())
+                    if(GroundCheck == null) 
                     {
-                        OnDoubleJump?.Invoke();
+                        Debug.LogError("The player has no GroundChecker to use. Please add one.");
+                    }
+                    else if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && GroundCheck.CheckIfGrounded())
+                    {
+                        Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
+                    }
+                    // double jump
+                    else if(!GroundCheck.CheckIfGrounded() && DoubleJumpObtained && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !DoubleJumpUsed)
+                    {
+                        // check for buddy and buddy cooldown
+                        DoubleJumpBuddy buddy = BuddyManager.Instance.GetBuddy<DoubleJumpBuddy>();
+                        if (buddy != null && buddy.CanDoubleJump())
+                        {
+                            OnDoubleJump?.Invoke();
+                        }
                     }
                 }
             }
