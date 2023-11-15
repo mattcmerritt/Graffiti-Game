@@ -121,7 +121,12 @@ public class PlatformingPlayer : MonoBehaviour
                 // double jump
                 else if(!GroundCheck.CheckIfGrounded() && DoubleJumpObtained && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !DoubleJumpUsed)
                 {
-                    OnDoubleJump?.Invoke();
+                    // check for buddy and buddy cooldown
+                    DoubleJumpBuddy buddy = BuddyManager.Instance.GetBuddy<DoubleJumpBuddy>();
+                    if (buddy != null && buddy.CanDoubleJump())
+                    {
+                        OnDoubleJump?.Invoke();
+                    }
                 }
             }
 
