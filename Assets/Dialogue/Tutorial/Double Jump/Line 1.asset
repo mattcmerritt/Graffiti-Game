@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 1
   m_EditorClassIdentifier: 
   SpeakerName: Fresco
-  SpeakerImage: {fileID: 21300000, guid: 15c69a2d3eb209942a2f329404875952, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: 1fc4f0ee5bcd49e478e9ca37cdb330de, type: 3}
   Message: Watch out! That next platform is pretty far away.
   NextLine: {fileID: 11400000, guid: 7fedc0a606a764342a1f1589046664df, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 8
   m_EditorClassIdentifier: 
   SpeakerName: Player
-  SpeakerImage: {fileID: 21300000, guid: 29c4eec04874213479a1c1b96744e7c3, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: 1d919e11098a248499bc5b581ac5d2c2, type: 3}
   Message: "Let\u2019s go. We need to figure out what's going on!"
   NextLine: {fileID: 0}

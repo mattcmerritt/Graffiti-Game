@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 3
   m_EditorClassIdentifier: 
   SpeakerName: Fresco
-  SpeakerImage: {fileID: 21300000, guid: 15c69a2d3eb209942a2f329404875952, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: 920bd7d9787e8ca409acbfb80d2f29fa, type: 3}
   Message: Here, I have a trick that might help. Just follow my lead!
   NextLine: {fileID: 11400000, guid: 7f937477d14c519498ae6ca2785dd21d, type: 2}

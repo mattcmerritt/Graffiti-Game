@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 6
   m_EditorClassIdentifier: 
   SpeakerName: Player
-  SpeakerImage: {fileID: 21300000, guid: 29c4eec04874213479a1c1b96744e7c3, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: a7d12434226cdb641855674052593acf, type: 3}
   Message: "You mean\u2026?\r"
   NextLine: {fileID: 11400000, guid: b66ad30b325c9e24ea7e6d935bb67c93, type: 2}

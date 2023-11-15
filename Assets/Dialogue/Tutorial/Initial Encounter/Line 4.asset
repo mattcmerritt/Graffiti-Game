@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 4
   m_EditorClassIdentifier: 
   SpeakerName: Player
-  SpeakerImage: {fileID: 21300000, guid: 29c4eec04874213479a1c1b96744e7c3, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: c890bac13dfd60c48875be514dee33a1, type: 3}
   Message: A splatter?
   NextLine: {fileID: 11400000, guid: 5eb6b62d0a0387e439613af7e8a55aab, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 2
   m_EditorClassIdentifier: 
   SpeakerName: Player
-  SpeakerImage: {fileID: 21300000, guid: 29c4eec04874213479a1c1b96744e7c3, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: c890bac13dfd60c48875be514dee33a1, type: 3}
   Message: "I know! It's spreading everywhere. How do we escape it?\r"
   NextLine: {fileID: 11400000, guid: 28e7fdeff77e70b43acc0b2ede46ed4d, type: 2}

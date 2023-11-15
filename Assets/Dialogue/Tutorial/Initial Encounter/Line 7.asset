@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 7
   m_EditorClassIdentifier: 
   SpeakerName: Fresco
-  SpeakerImage: {fileID: 21300000, guid: 15c69a2d3eb209942a2f329404875952, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: 0116e408150b5604ebc61b4936bfc0bb, type: 3}
   Message: "The City Side, yes.\r"
   NextLine: {fileID: 11400000, guid: 3368a1cb2b5ad8a4e9b4ccd02235c3a6, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 1
   m_EditorClassIdentifier: 
   SpeakerName: Fresco
-  SpeakerImage: {fileID: 21300000, guid: 15c69a2d3eb209942a2f329404875952, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: 9e5a7afd9538e4a48bc42ba62433235c, type: 3}
   Message: Use Space to attack enemies!
   NextLine: {fileID: 0}

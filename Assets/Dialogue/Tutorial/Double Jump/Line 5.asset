@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Line 5
   m_EditorClassIdentifier: 
   SpeakerName: Fresco
-  SpeakerImage: {fileID: 21300000, guid: 15c69a2d3eb209942a2f329404875952, type: 3}
+  SpeakerImage: {fileID: 21300000, guid: 1fc4f0ee5bcd49e478e9ca37cdb330de, type: 3}
   Message: "Press SPACE to jump as high as I do. It\u2019s probably double your own!\r"
   NextLine: {fileID: 0}
