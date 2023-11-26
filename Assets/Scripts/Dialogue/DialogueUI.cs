@@ -78,4 +78,14 @@ public class DialogueUI : MonoBehaviour
             DisplayCurrentLine();
         }
     }
+
+    public void GoToPreviousLine()
+    {
+        // Set the current DialogueLine to the next one in the conversation
+        if (CurrentLine.PreviousLine != null)
+        {
+            CurrentLine = CurrentLine.PreviousLine;
+            DisplayCurrentLine();
+        }
+    }
 }

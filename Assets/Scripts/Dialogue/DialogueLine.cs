@@ -14,4 +14,5 @@ public class DialogueLine : ScriptableObject
     [TextArea(5, 10)]
     public string Message;
     public DialogueLine NextLine; // reference to another line to continue conversation
+    public DialogueLine PreviousLine; // reference to another line to go back in conversation
 }
