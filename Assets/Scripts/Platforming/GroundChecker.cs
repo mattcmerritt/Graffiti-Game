@@ -5,4 +5,6 @@ using UnityEngine;
 public abstract class GroundChecker : MonoBehaviour
 {
     public abstract bool CheckIfGrounded();
+
+    public abstract bool CheckIfGroundStable();
 }
