@@ -72,14 +72,19 @@ public class IsometricPlayer : MonoBehaviour
             // Dash functionality
             if (DashEnabled && DashAvailable && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.Z)))
             {
-                // Debug.Log("Dashed!");
-                SpriteRenderer.color = Color.green;
-                Rigidbody.velocity = DashForce * input;
-                DashActive = true; // activate the dash state
-                DashAvailable = false; // start cooldown
-                DashCooldown = 0f;
-                DashDuration = 0f;
-                OnDash?.Invoke(MaxDashCooldown);
+                // check for buddy and buddy cooldown
+                DashBuddy buddy = BuddyManager.Instance.GetBuddy<DashBuddy>();
+                if (buddy != null && buddy.CanDash())
+                {
+                    // Debug.Log("Dashed!");
+                    SpriteRenderer.color = Color.green;
+                    Rigidbody.velocity = DashForce * input;
+                    DashActive = true; // activate the dash state
+                    DashAvailable = false; // start cooldown
+                    DashCooldown = 0f;
+                    DashDuration = 0f;
+                    OnDash?.Invoke(MaxDashCooldown);
+                }
             }
 
             // Dash cooldown management
