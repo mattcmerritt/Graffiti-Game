@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 4
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 920bd7d9787e8ca409acbfb80d2f29fa, type: 3}
+  Message: 'Press [INSERT KEY HERE] to activate our special move. Let''s pound these
+    guys! '
   NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  PreviousLine: {fileID: 11400000, guid: 2db64d5f510cf0640b56b70567e4d903, type: 2}

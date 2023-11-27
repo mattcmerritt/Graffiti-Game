@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeakerName: Fresco
   SpeakerImage: {fileID: 21300000, guid: 1fc4f0ee5bcd49e478e9ca37cdb330de, type: 3}
-  Message: '[Insert PC''s Name here], quick! We gotta bounce. I don''t know what''s
-    happening, but it doesn''t look good!'
+  Message: Benny, quick! We gotta bounce. I don't know what's happening, but it doesn't
+    look good!
   NextLine: {fileID: 11400000, guid: e1d17fd119c53c04fbf4aae21050cf22, type: 2}
+  PreviousLine: {fileID: 0}

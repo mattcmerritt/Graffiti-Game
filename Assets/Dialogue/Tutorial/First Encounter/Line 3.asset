@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 3
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 1fc4f0ee5bcd49e478e9ca37cdb330de, type: 3}
+  Message: Less questions, more fighting!!
+  NextLine: {fileID: 11400000, guid: 2611799b5973fe046937741c360855c5, type: 2}
+  PreviousLine: {fileID: 11400000, guid: f4167a54f65293e43afacbc897f01847, type: 2}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 2
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 9e5a7afd9538e4a48bc42ba62433235c, type: 3}
+  Message: "Yeah, I don\u2019t know where they\u2019re all coming from.\r"
+  NextLine: {fileID: 11400000, guid: 45d1dc38d4c5c5845a8ce4adbc86cde5, type: 2}
+  PreviousLine: {fileID: 11400000, guid: 72fe078dd1001cd438b9e080ec542984, type: 2}

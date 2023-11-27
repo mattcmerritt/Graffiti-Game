@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 2
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 0116e408150b5604ebc61b4936bfc0bb, type: 3}
+  Message: "Plus, look at all the sludge covering these buildings. It\u2019s ruining
+    what little art we had left."
+  NextLine: {fileID: 11400000, guid: b89cfcce87ca4a9438d19b8b45785842, type: 2}
+  PreviousLine: {fileID: 11400000, guid: 7bfd3348845edb64e8c1913b7193b598, type: 2}

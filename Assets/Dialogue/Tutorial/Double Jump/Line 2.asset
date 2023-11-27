@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 2
   m_EditorClassIdentifier: 
-  SpeakerName: Player
+  SpeakerName: Benny
   SpeakerImage: {fileID: 21300000, guid: a7d12434226cdb641855674052593acf, type: 3}
   Message: "Hey, you\u2019re right... what should we do??"
   NextLine: {fileID: 11400000, guid: de6e1962f6c4db04291e273ebbc05a19, type: 2}
+  PreviousLine: {fileID: 11400000, guid: 4172b802cb0c61d4b8de1c7a827666d8, type: 2}

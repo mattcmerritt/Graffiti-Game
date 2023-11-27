@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 5
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerName: Benny
+  SpeakerImage: {fileID: 21300000, guid: a7d12434226cdb641855674052593acf, type: 3}
+  Message: What are we going to do? There are so many of them.
+  NextLine: {fileID: 11400000, guid: 3b1ce0c5935f2dd4a9d0b5050c8d97ef, type: 2}
+  PreviousLine: {fileID: 11400000, guid: df0bf2614428bc2459b1c0e206f37a29, type: 2}

@@ -16,3 +16,4 @@ MonoBehaviour:
   SpeakerImage: {fileID: 21300000, guid: 0116e408150b5604ebc61b4936bfc0bb, type: 3}
   Message: "The City Side, yes.\r"
   NextLine: {fileID: 11400000, guid: 3368a1cb2b5ad8a4e9b4ccd02235c3a6, type: 2}
+  PreviousLine: {fileID: 11400000, guid: f9b7655e240b25b4296576935dbf2cc1, type: 2}

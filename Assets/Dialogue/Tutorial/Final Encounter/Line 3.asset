@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 3
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 9e5a7afd9538e4a48bc42ba62433235c, type: 3}
+  Message: "You know I get some killer height with my jumps. When you give the cue,
+    I\u2019ll get you in the air. Your kicks mixed with my jumps? They won\u2019t
+    stand a chance. "
+  NextLine: {fileID: 11400000, guid: cb67d754a1edca0459358dc23c4e1763, type: 2}
+  PreviousLine: {fileID: 11400000, guid: 194d1d1b859fc0344812d17d060bded6, type: 2}

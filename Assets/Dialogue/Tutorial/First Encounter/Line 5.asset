@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 5
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 0116e408150b5604ebc61b4936bfc0bb, type: 3}
+  Message: "Okay, okay! Press SPACE to attack these guys. You have strong kicks,
+    they won\u2019t even know what hit \u2018em."
   NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  PreviousLine: {fileID: 11400000, guid: 2611799b5973fe046937741c360855c5, type: 2}

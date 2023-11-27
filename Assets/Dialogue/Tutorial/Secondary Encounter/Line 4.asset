@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 4
   m_EditorClassIdentifier: 
-  SpeakerName: 
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerName: Benny
+  SpeakerImage: {fileID: 21300000, guid: 1d919e11098a248499bc5b581ac5d2c2, type: 3}
+  Message: "Right. Let\u2019s do this! Make sure everyone else knows what\u2019s
+    happening."
+  NextLine: {fileID: 11400000, guid: 8764d86c6c50a1e49be0f44fb6eb7002, type: 2}
+  PreviousLine: {fileID: 11400000, guid: 45d1dc38d4c5c5845a8ce4adbc86cde5, type: 2}

@@ -15,5 +15,5 @@ MonoBehaviour:
   SpeakerName: Benny
   SpeakerImage: {fileID: 21300000, guid: a7d12434226cdb641855674052593acf, type: 3}
   Message: "Hey! Those were the things tearing apart our home!\r"
-  NextLine: {fileID: 0}
+  NextLine: {fileID: 11400000, guid: dcf1e1695eddd5146b4f91e9351571b3, type: 2}
   PreviousLine: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Line 2
   m_EditorClassIdentifier: 
   SpeakerName: Benny
-  SpeakerImage: {fileID: 0}
-  Message: 
-  NextLine: {fileID: 0}
-  PreviousLine: {fileID: 0}
+  SpeakerImage: {fileID: 21300000, guid: a7d12434226cdb641855674052593acf, type: 3}
+  Message: What do we do??
+  NextLine: {fileID: 11400000, guid: bffc477b5e5c2844b8aebfb6acf75b38, type: 2}
+  PreviousLine: {fileID: 11400000, guid: affb124f9593d3345a0426cd027781fc, type: 2}

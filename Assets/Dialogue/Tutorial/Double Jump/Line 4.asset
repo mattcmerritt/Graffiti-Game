@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
   m_Name: Line 4
   m_EditorClassIdentifier: 
-  SpeakerName: Player
+  SpeakerName: Benny
   SpeakerImage: {fileID: 21300000, guid: 1d919e11098a248499bc5b581ac5d2c2, type: 3}
   Message: "On it, Fresco! Glad you came along.\r"
   NextLine: {fileID: 11400000, guid: b58bc05657f070c4697650457a4bbd3f, type: 2}
+  PreviousLine: {fileID: 11400000, guid: de6e1962f6c4db04291e273ebbc05a19, type: 2}
