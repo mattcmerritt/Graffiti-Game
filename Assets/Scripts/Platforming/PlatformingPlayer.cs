@@ -20,6 +20,7 @@ public class PlatformingPlayer : MonoBehaviour
     [SerializeField] private float DashCooldown, DashDuration;
     [SerializeField] private Color PlayerColor, CooldownColor, DashBuddyColor, ImmobileColor;
     [SerializeField] private float OutOfBoundsTimer;
+    [SerializeField] private float IdleFreezeTimer; // used to see when the player should freeze after stopping (for slopes)
 
     // internal player values (usually used in runtime for cooldowns and stuff)
     private float CurrentDashCooldown, CurrentDashDuration;
@@ -31,6 +32,7 @@ public class PlatformingPlayer : MonoBehaviour
     private bool Paused;
     private Vector2 PreviousVelocity;
     private float PreviousGravity;
+    [SerializeField] private float TimeSpentIdle;
 
     // player components
     private Rigidbody2D Rb;
@@ -67,6 +69,8 @@ public class PlatformingPlayer : MonoBehaviour
 
         PlatformingLevel.Instance.OnPause += Pause;
         PlatformingLevel.Instance.OnResume += Resume;
+
+        TimeSpentIdle = 0;
     }
 
     private void Update() 
@@ -95,7 +99,27 @@ public class PlatformingPlayer : MonoBehaviour
                 // update last direction moved in to store for dash
                 if(Input.GetAxisRaw("Horizontal") != 0)
                 {
+                    Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    TimeSpentIdle = 0;
+
                     FacingDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
+                }
+
+                if(!GroundCheck.CheckIfGrounded() || !GroundCheck.CheckIfGroundStable())
+                {
+                    Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    TimeSpentIdle = 0;
+                }
+                
+                // if you are not moving but on the ground, make it so you cant move
+                if(Input.GetAxisRaw("Horizontal") == 0 && !DashActive && GroundCheck.CheckIfGrounded() && GroundCheck.CheckIfGroundStable() && (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow))) // jump inputs
+                {
+                    if(TimeSpentIdle > IdleFreezeTimer)
+                    {
+                        Rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+                    }
+
+                    TimeSpentIdle += Time.deltaTime;
                 }
 
                 // set flip variable of player sprite
@@ -118,6 +142,7 @@ public class PlatformingPlayer : MonoBehaviour
                     }
                     else if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && GroundCheck.CheckIfGrounded())
                     {
+                        Rb.constraints = RigidbodyConstraints2D.FreezeRotation; // allow movement if starting from idle
                         Rb.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
                     }
                     // double jump
@@ -197,6 +222,8 @@ public class PlatformingPlayer : MonoBehaviour
 
     private void StartDash(float cooldown) 
     {
+        Rb.constraints = RigidbodyConstraints2D.FreezeRotation; // allow movement if starting from idle
+
         DashActive = true;
         CurrentDashCooldown = DashCooldown;
         CurrentDashDuration = DashDuration;

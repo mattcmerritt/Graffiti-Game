@@ -506,6 +506,7 @@ MonoBehaviour:
   DashBuddyColor: {r: 0, g: 1, b: 0, a: 1}
   ImmobileColor: {r: 1, g: 0, b: 0, a: 1}
   OutOfBoundsTimer: 3
+  IdleFreezeTimer: 0.1
   GroundCheck: {fileID: 0}
   RespawnMessage: {fileID: 3257113819319424362}
 --- !u!1 &7187873634918800717
