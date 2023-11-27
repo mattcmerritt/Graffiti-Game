@@ -398,7 +398,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: cac09fc695d9cdf4182a603dfa1989b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -507,6 +507,7 @@ MonoBehaviour:
   ImmobileColor: {r: 1, g: 0, b: 0, a: 1}
   OutOfBoundsTimer: 3
   IdleFreezeTimer: 0.1
+  TimeSpentIdle: 0
   GroundCheck: {fileID: 0}
   RespawnMessage: {fileID: 3257113819319424362}
 --- !u!1 &7187873634918800717
