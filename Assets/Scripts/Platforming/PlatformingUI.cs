@@ -7,6 +7,7 @@ public class PlatformingUI : MonoBehaviour
 {
     [SerializeField] private Image DashIndicator;
     [SerializeField] private Image DoubleJumpIndicator;
+    [SerializeField] private GameObject DashUI, JumpUI;
 
     // Internal data
     private float DashCooldown, MaxDashCooldown;
@@ -19,6 +20,11 @@ public class PlatformingUI : MonoBehaviour
         PlatformingLevel.Instance.OnPlayerDoubleJumpRefresh += () => UpdateDoubleJumpIndicator(true);
         PlatformingLevel.Instance.OnPause += Pause;
         PlatformingLevel.Instance.OnResume += Resume;
+        PlatformingLevel.Instance.OnPause += HideAbilities;
+        PlatformingLevel.Instance.OnResume += ShowAbilities;
+        
+        // Initially show the abilities to in cases where no dialogue starts immediately
+        ShowAbilities();
     }
 
     private void Update()
@@ -64,5 +70,23 @@ public class PlatformingUI : MonoBehaviour
     private void Resume()
     {
         Paused = false;
+    }
+
+    private void HideAbilities()
+    {
+        DashUI.SetActive(false);
+        JumpUI.SetActive(false);
+    }
+
+    private void ShowAbilities()
+    {
+        if (BuddyManager.Instance.GetBuddy<DoubleJumpBuddy>())
+        {
+            JumpUI.SetActive(true);
+        }
+        if (BuddyManager.Instance.GetBuddy<DashBuddy>())
+        {
+            DashUI.SetActive(true);
+        }
     }
 }

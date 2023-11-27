@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &225641287180787926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5201352745415328665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1005,6 +1005,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DashIndicator: {fileID: 5675046354024331406}
   DoubleJumpIndicator: {fileID: 970953402140103956}
+  DashUI: {fileID: 2923928964564572765}
+  JumpUI: {fileID: 5054152128413463835}
 --- !u!1001 &5890137425489594220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1016,6 +1018,10 @@ PrefabInstance:
     - target: {fileID: 1898002445224628584, guid: 63741b1f3fe13b546bdf136b98305fee, type: 3}
       propertyPath: m_Name
       value: Dialogue Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898002445224628584, guid: 63741b1f3fe13b546bdf136b98305fee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566690983678466365, guid: 63741b1f3fe13b546bdf136b98305fee, type: 3}
       propertyPath: m_Pivot.x

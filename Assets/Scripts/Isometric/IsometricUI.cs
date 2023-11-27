@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class IsometricUI : MonoBehaviour
 {
     [SerializeField] private Image HealthBar;
-    [SerializeField] private Image DashIndicator;
+    [SerializeField] private Image DashIndicator, JumpIndicator;
+    [SerializeField] private GameObject DashUI, JumpUI;
 
     // Internal data
     private float DashCooldown, MaxDashCooldown;
@@ -18,6 +19,11 @@ public class IsometricUI : MonoBehaviour
         IsometricEncounter.Instance.OnPlayerDash += UpdateDashIndicator;
         IsometricEncounter.Instance.OnPause += Pause;
         IsometricEncounter.Instance.OnResume += Resume;
+        IsometricEncounter.Instance.OnPause += HideAbilities;
+        IsometricEncounter.Instance.OnResume += ShowAbilities;
+
+        // Initially show the abilities to in cases where no dialogue starts immediately
+        ShowAbilities();
     }
 
     private void Update()
@@ -57,5 +63,23 @@ public class IsometricUI : MonoBehaviour
     private void Resume()
     {
         Paused = false;
+    }
+
+    private void HideAbilities()
+    {
+        DashUI.SetActive(false);
+        JumpUI.SetActive(false);
+    }
+
+    private void ShowAbilities()
+    {
+        if (BuddyManager.Instance.GetBuddy<DoubleJumpBuddy>())
+        {
+            JumpUI.SetActive(true);
+        }
+        if (BuddyManager.Instance.GetBuddy<DashBuddy>())
+        {
+            DashUI.SetActive(true);
+        }
     }
 }

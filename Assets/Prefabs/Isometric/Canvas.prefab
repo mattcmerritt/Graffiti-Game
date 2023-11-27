@@ -330,6 +330,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 3365160905016862967}
   DashIndicator: {fileID: 6348176354670678942}
+  JumpIndicator: {fileID: 709486389487487270}
+  DashUI: {fileID: 2099757581840528623}
+  JumpUI: {fileID: 3146524014031114955}
 --- !u!1 &2099757581840528623
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2701163113094168513
 RectTransform:
   m_ObjectHideFlags: 0
