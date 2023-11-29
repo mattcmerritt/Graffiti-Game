@@ -6,11 +6,11 @@ using UnityEngine;
 public class PlatformingLevel : MonoBehaviour
 {
     public static PlatformingLevel Instance;
-    private static PlatformingPlayer Player;
-    private bool Paused;
+    protected static PlatformingPlayer Player;
+    protected bool Paused;
 
-    private OverworldDialogueTrigger[] DialogueTriggers;
-    private DialogueUI Dialogue;
+    protected OverworldDialogueTrigger[] DialogueTriggers;
+    protected DialogueUI Dialogue;
 
     public event Action<float> OnPlayerDash;
     public event Action OnPlayerDoubleJump;
@@ -19,12 +19,12 @@ public class PlatformingLevel : MonoBehaviour
     public event Action OnResume;
 
     // Configure singleton instance at earliest step
-    private void Awake()
+    protected void Awake()
     {
         Instance = this;
     }
 
-    private void Start()
+    protected void Start()
     {
         Player = FindObjectOfType<PlatformingPlayer>();
         DialogueTriggers = FindObjectsOfType<OverworldDialogueTrigger>();
@@ -45,7 +45,7 @@ public class PlatformingLevel : MonoBehaviour
         Dialogue.OnConversationOver += ResumeGame;
     }
 
-    private void Update()
+    protected void Update()
     {
         // Debug Pausing
         if (Input.GetKeyDown(KeyCode.P))
@@ -94,5 +94,10 @@ public class PlatformingLevel : MonoBehaviour
     private void StartDialogue(DialogueLine line)
     {
         Dialogue.StartConversation(line);
+    }
+
+    public bool CheckIfPaused()
+    {
+        return Paused;
     }
 }

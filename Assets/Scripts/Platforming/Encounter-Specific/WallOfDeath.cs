@@ -9,12 +9,15 @@ public class WallOfDeath : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position += new Vector3(ScrollSpeed, 0, 0);
+        if(!PlatformingEncounter.Instance.CheckIfPaused())
+        {
+            transform.position += new Vector3(ScrollSpeed, 0, 0);
+        }   
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO: do something with scene transitioner
         Debug.LogWarning("The encounter has been failed.");
+        PlatformingEncounter.Instance.FailEncounter();
     }
 }
