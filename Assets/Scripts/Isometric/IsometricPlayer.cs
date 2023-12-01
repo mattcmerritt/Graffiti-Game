@@ -149,7 +149,7 @@ public class IsometricPlayer : MonoBehaviour
                 if (HitDelay <= 0f)
                 {
                     HitDelay = 0f;
-                    // SpriteRenderer.color = Color.white;
+                    SpriteRenderer.color = Color.white;
                     HitRecently = false;
                 }
             }
