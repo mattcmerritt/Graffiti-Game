@@ -17,7 +17,7 @@ public class WallOfDeath : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.LogWarning("The encounter has been failed.");
+        // Debug.LogWarning("The encounter has been failed.");
         PlatformingEncounter.Instance.FailEncounter();
     }
 }

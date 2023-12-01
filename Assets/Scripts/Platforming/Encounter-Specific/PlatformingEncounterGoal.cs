@@ -6,7 +6,7 @@ public class PlatformingEncounterGoal : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("The encounter has been cleared.");
+        // Debug.Log("The encounter has been cleared.");
         PlatformingEncounter.Instance.ClearEncounterSuccessfully();
     }
 }

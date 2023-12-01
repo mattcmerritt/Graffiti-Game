@@ -17,6 +17,9 @@ public class PlatformingEncounter : PlatformingLevel
         base.Awake();
 
         Instance = this;
+        Transitioner = FindObjectOfType<SceneTransitioner>();
+        OnWallOfDeathCollision += ReturnToCityFail;
+        OnEncounterClear += ReturnToCitySuccess;
     }
 
     protected new void Start()
