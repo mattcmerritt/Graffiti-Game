@@ -8,6 +8,7 @@ public class RespawnPoint : MonoBehaviour
     [SerializeField] private string RespawnName;
     [SerializeField] private bool Activated;
     [SerializeField] private Color ActivatedColor;
+    [SerializeField] private Sprite ActivatedSprite;
 
     private void Start()
     {
@@ -29,7 +30,8 @@ public class RespawnPoint : MonoBehaviour
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            GetComponent<SpriteRenderer>().color = ActivatedColor;
+            // GetComponent<SpriteRenderer>().color = ActivatedColor;
+            GetComponent<SpriteRenderer>().sprite = ActivatedSprite;
         }
         // GetComponent<Collider2D>().enabled = false;
     }
