@@ -99,6 +99,7 @@ MonoBehaviour:
   PreviousInteractor: {fileID: 0}
   StartingLine: {fileID: 11400000, guid: 08cae90ae7fa2d94694f2dfb541283e0, type: 2}
   IsFirstBuddyEncounter: 1
+  NewBuddyType: 0
 --- !u!1 &8357686253532353498
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.22150296, g: 0.4433962, b: 0.21542364, a: 1}
   m_FlipX: 0

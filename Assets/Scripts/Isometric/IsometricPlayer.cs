@@ -50,6 +50,9 @@ public class IsometricPlayer : MonoBehaviour
     // Directional sprites
     [SerializeField] private List<Sprite> DirectionalPlayerSprites;
 
+    // Animation
+    [SerializeField] private Animator Animator;
+
     // Load encounter specific information from the level data
     private void Start()
     {
@@ -68,6 +71,28 @@ public class IsometricPlayer : MonoBehaviour
             float verticalInput = Input.GetAxisRaw("Vertical");
             Vector3 normalizedInput = Vector3.Normalize(new Vector3(horizontalInput, verticalInput, 0));
             Vector3 input = normalizedInput.x * new Vector3(1, 0, -1) * CorrectionRatio.x + normalizedInput.y * new Vector3(1, 0, 1) * CorrectionRatio.y;
+
+            // Animation
+            if (horizontalInput > 0)
+            {
+                Animator.SetTrigger("WalkRight");
+            }
+            else if (horizontalInput < 0)
+            {
+                Animator.SetTrigger("WalkLeft");
+            }
+            else if (verticalInput > 0)
+            {
+                Animator.SetTrigger("WalkUp");
+            }
+            else if (verticalInput < 0)
+            {
+                Animator.SetTrigger("WalkDown");
+            }
+            else
+            {
+                Animator.SetTrigger("Stop");
+            }
 
             // Dash functionality
             if (DashEnabled && DashAvailable && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.Z)))

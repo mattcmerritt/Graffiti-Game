@@ -42,6 +42,9 @@ public class PlatformingPlayer : MonoBehaviour
     [SerializeField] private GameObject RespawnMessage; // TODO: maybe a better way to ddo this than in editor?
     private PlatformingLevel PlatformingLevel;
 
+    // Animation
+    [SerializeField] private Animator Animator;
+
     // TODO: OnEnable and OnDisable should change eventually to support being active and inactive
     private void OnEnable() 
     {
@@ -85,8 +88,13 @@ public class PlatformingPlayer : MonoBehaviour
 
             if (intersectedPlanes.Count > 0)
             {
+                // reset animations from paint ball form
+                Animator.SetTrigger("Land");
+                Animator.ResetTrigger("OffWall");
+                Animator.ResetTrigger("OffWallFalling");
+
                 // check for dash
-                if((Input.GetKey(KeyCode.LeftShift) || (Input.GetKey(KeyCode.Z))) && CurrentDashCooldown <= 0) 
+                if ((Input.GetKey(KeyCode.LeftShift) || (Input.GetKey(KeyCode.Z))) && CurrentDashCooldown <= 0) 
                 {
                     // check for buddy and buddy cooldown
                     DashBuddy buddy = BuddyManager.Instance.GetBuddy<DashBuddy>();
@@ -103,6 +111,14 @@ public class PlatformingPlayer : MonoBehaviour
                     TimeSpentIdle = 0;
 
                     FacingDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
+                    
+                    // play walking animation
+                    Animator.SetTrigger("Walk");
+                }
+                // otherwise stop the animation
+                else
+                {
+                    Animator.SetTrigger("Stop");
                 }
 
                 if(!GroundCheck.CheckIfGrounded() || !GroundCheck.CheckIfGroundStable())
@@ -155,6 +171,19 @@ public class PlatformingPlayer : MonoBehaviour
                             OnDoubleJump?.Invoke();
                         }
                     }
+                }
+            }
+            // otherwise show the player as a blob of paint
+            else
+            {
+                Animator.ResetTrigger("Land");
+                if (Rb.velocity.y > 0)
+                {
+                    Animator.SetTrigger("OffWall");
+                }
+                else
+                {
+                    Animator.SetTrigger("OffWallFalling");
                 }
             }
 
