@@ -508,6 +508,7 @@ MonoBehaviour:
   ImmobileColor: {r: 1, g: 1, b: 1, a: 1}
   OutOfBoundsTimer: 3
   IdleFreezeTimer: 0.1
+  CameraMinHeight: 6
   TimeSpentIdle: 0
   GroundCheck: {fileID: 0}
   RespawnMessage: {fileID: 3257113819319424362}

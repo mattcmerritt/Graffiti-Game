@@ -21,6 +21,7 @@ public class PlatformingPlayer : MonoBehaviour
     [SerializeField] private Color PlayerColor, CooldownColor, DashBuddyColor, ImmobileColor;
     [SerializeField] private float OutOfBoundsTimer;
     [SerializeField] private float IdleFreezeTimer; // used to see when the player should freeze after stopping (for slopes)
+    [SerializeField] private float CameraMinHeight; // the lowest point the camera will follow to
 
     // internal player values (usually used in runtime for cooldowns and stuff)
     private float CurrentDashCooldown, CurrentDashDuration;
@@ -196,7 +197,7 @@ public class PlatformingPlayer : MonoBehaviour
             UpdatePlayerStateVariables(intersectedPlanes);
 
             // grab camera for following
-            Camera.main.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.gameObject.transform.position.z);
+            Camera.main.gameObject.transform.position = new Vector3(transform.position.x, Mathf.Max(CameraMinHeight, transform.position.y), Camera.main.gameObject.transform.position.z);
         }
         
     }
@@ -371,7 +372,7 @@ public class PlatformingPlayer : MonoBehaviour
         }
     }
 
-    private void RespawnPlayerAtNearest()
+    public void RespawnPlayerAtNearest()
     {
         RespawnPoint[] respawnPoints = FindObjectsOfType<RespawnPoint>();
         List<GameObject> respawnObjects = new List<GameObject>();
