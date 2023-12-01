@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a8bd320db78e44da1e9d19b007f254, type: 3}
+  m_Name: Line 3
+  m_EditorClassIdentifier: 
+  SpeakerName: Fresco
+  SpeakerImage: {fileID: 21300000, guid: 920bd7d9787e8ca409acbfb80d2f29fa, type: 3}
+  Message: "That stuff dripping down\u2026 looks acidic. Let\u2019s avoid touching
+    that.\r"
+  NextLine: {fileID: 11400000, guid: 49334a19144d7924e83f048dc92ac579, type: 2}
+  PreviousLine: {fileID: 11400000, guid: dfc0d6875620cb04f856c51867ce7fa3, type: 2}
