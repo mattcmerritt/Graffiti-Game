@@ -102,7 +102,7 @@ public class IsometricPlayer : MonoBehaviour
                 if (buddy != null && buddy.CanDash())
                 {
                     // Debug.Log("Dashed!");
-                    SpriteRenderer.color = Color.green;
+                    // SpriteRenderer.color = Color.green;
                     Rigidbody.velocity = DashForce * input;
                     DashActive = true; // activate the dash state
                     DashAvailable = false; // start cooldown
@@ -125,7 +125,7 @@ public class IsometricPlayer : MonoBehaviour
                     if (DashCooldown >= MaxDashCooldown)
                     {
                         // Debug.Log("Dash cooldown is over!");
-                        SpriteRenderer.color = Color.white;
+                        // SpriteRenderer.color = Color.white;
                         DashAvailable = true;
                     }
                 }
@@ -137,7 +137,7 @@ public class IsometricPlayer : MonoBehaviour
                 if (DashDuration >= MaxDashDuration)
                 {
                     // Debug.Log("Dash is over!");
-                    SpriteRenderer.color = Color.blue;
+                    // SpriteRenderer.color = Color.blue;
                     DashActive = false;
                 }
             }
@@ -149,7 +149,7 @@ public class IsometricPlayer : MonoBehaviour
                 if (HitDelay <= 0f)
                 {
                     HitDelay = 0f;
-                    SpriteRenderer.color = Color.white;
+                    // SpriteRenderer.color = Color.white;
                     HitRecently = false;
                 }
             }
