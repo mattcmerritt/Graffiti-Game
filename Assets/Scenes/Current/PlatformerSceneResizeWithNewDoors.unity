@@ -1512,7 +1512,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: b5
+      value: b3
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4028,7 +4028,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.29803923, g: 0.34901962, b: 0.4156863, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4623,7 +4623,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: s1
+      value: s2
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5864,7 +5864,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: b7
+      value: b5
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8068,7 +8068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3188746286633486801, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_Name
-      value: Respawn Point (b4)
+      value: Respawn Point (auto)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8972,7 +8972,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: b4
+      value: b2
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9344,7 +9344,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: s1
+      value: s4
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9646,7 +9646,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: b3
+      value: b1
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10344,7 +10344,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2473885401278898055, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: RespawnName
-      value: s1
+      value: s3
       objectReference: {fileID: 0}
     - target: {fileID: 3048255753311868435, guid: 6fba0effd1cb6a24b9a03dcaf1a162bf, type: 3}
       propertyPath: m_LocalPosition.x
