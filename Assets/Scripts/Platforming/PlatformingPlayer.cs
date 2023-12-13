@@ -106,8 +106,13 @@ public class PlatformingPlayer : MonoBehaviour
                     }
                 }
 
+                // if dashing, play the dash animation
+                if (DashActive)
+                {
+                    Animator.Play("DashRight");
+                }
                 // update last direction moved in to store for dash
-                if(Input.GetAxisRaw("Horizontal") != 0)
+                else if(Input.GetAxisRaw("Horizontal") != 0)
                 {
                     Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                     TimeSpentIdle = 0;
@@ -116,11 +121,6 @@ public class PlatformingPlayer : MonoBehaviour
                     
                     // play walking animation
                     Animator.Play("WalkRight");
-                }
-                // if dashing, play the dash animation
-                else if (DashActive)
-                {
-                    Animator.Play("DashRight");
                 }
                 // otherwise stop the animation
                 else
