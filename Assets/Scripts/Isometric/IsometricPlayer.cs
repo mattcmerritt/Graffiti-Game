@@ -74,7 +74,11 @@ public class IsometricPlayer : MonoBehaviour
             Vector3 input = normalizedInput.x * new Vector3(1, 0, -1) * CorrectionRatio.x + normalizedInput.y * new Vector3(1, 0, 1) * CorrectionRatio.y;
 
             // Animation
-            if (horizontalInput > 0)
+            if (DashActive)
+            {
+                Animator.Play("Dash" + WalkDirection);
+            }
+            else if (horizontalInput > 0)
             {
                 if (verticalInput > 0)
                 {
