@@ -89,11 +89,6 @@ public class PlatformingPlayer : MonoBehaviour
 
             if (intersectedPlanes.Count > 0)
             {
-                // reset animations from paint ball form
-                Animator.SetTrigger("Land");
-                Animator.ResetTrigger("OffWall");
-                Animator.ResetTrigger("OffWallFalling");
-
                 // check for dash
                 if ((Input.GetKey(KeyCode.LeftShift) || (Input.GetKey(KeyCode.Z))) && CurrentDashCooldown <= 0) 
                 {
@@ -114,12 +109,17 @@ public class PlatformingPlayer : MonoBehaviour
                     FacingDirection = (Input.GetAxisRaw("Horizontal") > 0) ? "right" : "left"; // determine direction the player is moving in
                     
                     // play walking animation
-                    Animator.SetTrigger("Walk");
+                    Animator.Play("WalkRight");
+                }
+                // if dashing, play the dash animation
+                else if (DashActive)
+                {
+                    Animator.Play("DashRight");
                 }
                 // otherwise stop the animation
                 else
                 {
-                    Animator.SetTrigger("Stop");
+                    Animator.Play("Idle");
                 }
 
                 if(!GroundCheck.CheckIfGrounded() || !GroundCheck.CheckIfGroundStable())
@@ -177,14 +177,13 @@ public class PlatformingPlayer : MonoBehaviour
             // otherwise show the player as a blob of paint
             else
             {
-                Animator.ResetTrigger("Land");
                 if (Rb.velocity.y > 0)
                 {
-                    Animator.SetTrigger("OffWall");
+                    Animator.Play("OffWallLoop");
                 }
                 else
                 {
-                    Animator.SetTrigger("OffWallFalling");
+                    Animator.Play("OffWallFalling");
                 }
             }
 
