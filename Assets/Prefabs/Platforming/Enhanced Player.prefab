@@ -112,8 +112,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You're out of bounds! Press R to respawn on a wall
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b2e7c773416e58b419fa92018796aa03, type: 2}
+  m_sharedMaterial: {fileID: -5824336030049145483, guid: b2e7c773416e58b419fa92018796aa03, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -336,8 +336,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Encounters
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b2e7c773416e58b419fa92018796aa03, type: 2}
+  m_sharedMaterial: {fileID: -5824336030049145483, guid: b2e7c773416e58b419fa92018796aa03, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -648,6 +648,8 @@ MonoBehaviour:
   RespawnMessage: {fileID: 3257113819319424362}
   CheckpointCounter: {fileID: 4350675184296154657}
   EncounterCounter: {fileID: 1313270693936088678}
+  EncountersCleared: 0
+  CheckpointsCleared: 0
   Animator: {fileID: 2794605544684851417}
 --- !u!95 &2794605544684851417
 Animator:
@@ -932,8 +934,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Checkpoints
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b2e7c773416e58b419fa92018796aa03, type: 2}
+  m_sharedMaterial: {fileID: -5824336030049145483, guid: b2e7c773416e58b419fa92018796aa03, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
