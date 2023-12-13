@@ -3519,6 +3519,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door5x3ARevised
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a73d48dcab028cd45b9a2eb4b242e59b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a73d48dcab028cd45b9a2eb4b242e59b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7380,6 +7388,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimpleBusStop
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34571213cae9ec442aaf7ce693cd690c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34571213cae9ec442aaf7ce693cd690c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -9370,9 +9386,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1917487660}
   - component: {fileID: 1917487661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2D Collider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9638,9 +9654,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1952344540}
   - component: {fileID: 1952344541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2D Collider (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
