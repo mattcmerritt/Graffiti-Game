@@ -44,6 +44,7 @@ public class PlatformingPlayer : MonoBehaviour
     [SerializeField] private GameObject RespawnMessage; // TODO: maybe a better way to ddo this than in editor?
     private PlatformingLevel PlatformingLevel;
     [SerializeField] private TMP_Text CheckpointCounter, EncounterCounter;
+    [SerializeField] private GameObject BusText;
     private SceneTransitioner SceneTransitioner;
 
     public int EncountersCleared, CheckpointsCleared;
@@ -456,5 +457,13 @@ public class PlatformingPlayer : MonoBehaviour
             EncountersCleared++;
         }
         EncounterCounter.text = "Splatters cleared: " + EncountersCleared + "/3";
+        if(CheckpointsCleared == 12 && EncountersCleared == 3)
+        {
+            BusText.SetActive(true);
+        }
+        else
+        {
+            BusText.SetActive(false);
+        }
     }
 }
