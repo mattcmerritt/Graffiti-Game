@@ -52,6 +52,7 @@ public class IsometricPlayer : MonoBehaviour
 
     // Animation
     [SerializeField] private Animator Animator;
+    [SerializeField] private string WalkDirection = "Right";
 
     // Load encounter specific information from the level data
     private void Start()
@@ -75,23 +76,53 @@ public class IsometricPlayer : MonoBehaviour
             // Animation
             if (horizontalInput > 0)
             {
-                Animator.SetTrigger("WalkRight");
+                if (verticalInput > 0)
+                {
+                    Animator.Play("WalkUpRight");
+                    WalkDirection = "UpRight";
+                }
+                else if (verticalInput < 0)
+                {
+                    Animator.Play("WalkDownRight");
+                    WalkDirection = "DownRight";
+                }
+                else
+                {
+                    Animator.Play("WalkRight");
+                    WalkDirection = "Right";
+                }
             }
             else if (horizontalInput < 0)
             {
-                Animator.SetTrigger("WalkLeft");
+                if (verticalInput > 0)
+                {
+                    Animator.Play("WalkUpLeft");
+                    WalkDirection = "UpLeft";
+                }
+                else if (verticalInput < 0)
+                {
+                    Animator.Play("WalkDownLeft");
+                    WalkDirection = "DownLeft";
+                }
+                else
+                {
+                    Animator.Play("WalkLeft");
+                    WalkDirection = "Left";
+                }
             }
-            else if (verticalInput > 0)
+            else if (verticalInput > 0 && horizontalInput == 0f)
             {
-                Animator.SetTrigger("WalkUp");
+                Animator.Play("WalkUp");
+                WalkDirection = "Up";
             }
-            else if (verticalInput < 0)
+            else if (verticalInput < 0 && horizontalInput == 0f)
             {
-                Animator.SetTrigger("WalkDown");
+                Animator.Play("WalkDown");
+                WalkDirection = "Down";
             }
             else
             {
-                Animator.SetTrigger("Stop");
+                Animator.Play("Idle" + WalkDirection);
             }
 
             // Dash functionality
@@ -103,6 +134,7 @@ public class IsometricPlayer : MonoBehaviour
                 {
                     // Debug.Log("Dashed!");
                     // SpriteRenderer.color = Color.green;
+                    Animator.Play("Dash" + WalkDirection);
                     Rigidbody.velocity = DashForce * input;
                     DashActive = true; // activate the dash state
                     DashAvailable = false; // start cooldown
@@ -191,6 +223,7 @@ public class IsometricPlayer : MonoBehaviour
         else
         {
             Rigidbody.velocity = Vector3.zero;
+            Animator.Play("Idle" + WalkDirection);
         }
     }
 
