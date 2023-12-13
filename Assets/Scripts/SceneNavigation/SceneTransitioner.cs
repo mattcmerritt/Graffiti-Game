@@ -38,6 +38,7 @@ public class SceneTransitioner : MonoBehaviour
             Animator.SetTrigger("Enter Stage (Good)");
             yield return new WaitForSeconds(TransitionDuration);
             Destroy(BuddyManager.Instance.gameObject);
+            Destroy(FindObjectOfType<LoopingAudio>().gameObject);
             BuddyManager.Instance = null;
             SceneManager.LoadScene("MainMenu");
             StartCoroutine(DestroyObjectOnReload());
