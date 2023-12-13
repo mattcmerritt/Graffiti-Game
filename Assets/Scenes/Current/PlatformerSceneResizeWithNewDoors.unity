@@ -9363,6 +9363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1952344540}
   - component: {fileID: 1952344541}
+  - component: {fileID: 1952344542}
   m_Layer: 6
   m_Name: 2D Collider (1)
   m_TagString: Ground
@@ -9430,6 +9431,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.9823265, y: 5.99146}
   m_EdgeRadius: 0
+--- !u!114 &1952344542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952344539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6cb6acada161f41af99c59fc917d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1954774244
 GameObject:
   m_ObjectHideFlags: 0

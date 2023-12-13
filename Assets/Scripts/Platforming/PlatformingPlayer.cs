@@ -46,6 +46,8 @@ public class PlatformingPlayer : MonoBehaviour
     [SerializeField] private TMP_Text CheckpointCounter, EncounterCounter;
     private SceneTransitioner SceneTransitioner;
 
+    public int EncountersCleared, CheckpointsCleared;
+
     // Animation
     [SerializeField] private Animator Animator;
 
@@ -438,8 +440,9 @@ public class PlatformingPlayer : MonoBehaviour
 
     public void UpdateProgressUI()
     {
-        CheckpointCounter.text = "Checkpoints tagged: " + SceneTransitioner.ActivatedRespawnPoints.Count + "/12";
-        int EncountersCleared = 0;
+        CheckpointsCleared = SceneTransitioner.ActivatedRespawnPoints.Count;
+        CheckpointCounter.text = "Checkpoints tagged: " + CheckpointsCleared + "/12";
+        EncountersCleared = 0;
         if (SceneTransitioner.CompletedEncounters.Contains("3DIsometric"))
         {
             EncountersCleared++;
