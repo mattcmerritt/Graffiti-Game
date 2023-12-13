@@ -37,12 +37,18 @@ public class SceneTransitioner : MonoBehaviour
             TransitionActive = true;
             Animator.SetTrigger("Enter Stage (Good)");
             yield return new WaitForSeconds(TransitionDuration);
+            Destroy(BuddyManager.Instance.gameObject);
+            BuddyManager.Instance = null;
             SceneManager.LoadScene("MainMenu");
-            Animator.SetTrigger("Leave Stage (Good)");
-            yield return new WaitForSeconds(TransitionDuration);
-            Destroy(this.gameObject);
+            StartCoroutine(DestroyObjectOnReload());
         }
+    }
 
+    public IEnumerator DestroyObjectOnReload()
+    {
+        Animator.SetTrigger("Leave Stage (Good)");
+        yield return new WaitForSeconds(TransitionDuration);
+        Destroy(this.gameObject);
     }
 
     public IEnumerator StartGameTransition()
