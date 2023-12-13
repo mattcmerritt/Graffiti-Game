@@ -15,8 +15,9 @@ public class SimpleRaycastGroundChecker : GroundChecker
 
     public override bool CheckIfGrounded() 
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, CheckDistance, GroundLayerMask);
-        return hit.collider != null;
+        bool InVerticalMotion = Mathf.Abs(GetComponentInParent<Rigidbody2D>().velocity.y) >= 0.01f; // check if stopped
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, CheckDistance, GroundLayerMask); // check if ground below
+        return hit.collider != null && !InVerticalMotion;
     }
 
     public override bool CheckIfGroundStable()
