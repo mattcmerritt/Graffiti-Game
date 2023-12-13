@@ -7,8 +7,8 @@ public class SceneTransitioner : MonoBehaviour
 {
     [SerializeField] private string PreviousScene, CurrentScene;
     [SerializeField] private bool CompletedLastEncounter;
-    [SerializeField] private List<string> CompletedEncounters;
-    [SerializeField] private List<string> ActivatedRespawnPoints;
+    [SerializeField] public List<string> CompletedEncounters;
+    [SerializeField] public List<string> ActivatedRespawnPoints;
     [SerializeField] private List<string> ActivatedDialogueCheckpoints;
 
     // Transition animation details

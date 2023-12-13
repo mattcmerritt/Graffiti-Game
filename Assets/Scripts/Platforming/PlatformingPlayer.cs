@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using TMPro;
 
 public class PlatformingPlayer : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class PlatformingPlayer : MonoBehaviour
     private PlaneChecker PlaneCheck;
     [SerializeField] private GameObject RespawnMessage; // TODO: maybe a better way to ddo this than in editor?
     private PlatformingLevel PlatformingLevel;
+    [SerializeField] private TMP_Text CheckpointCounter, EncounterCounter;
+    private SceneTransitioner SceneTransitioner;
 
     // Animation
     [SerializeField] private Animator Animator;
@@ -63,6 +66,7 @@ public class PlatformingPlayer : MonoBehaviour
 
     private void Start() 
     {
+        SceneTransitioner = GameObject.FindObjectOfType<SceneTransitioner>();
         Rb = GetComponent<Rigidbody2D>();
         GroundCheck = GetComponentInChildren<GroundChecker>();
         PlaneCheck = GetComponentInChildren<PlaneChecker>();
@@ -79,6 +83,8 @@ public class PlatformingPlayer : MonoBehaviour
 
     private void Update() 
     {
+        UpdateProgressUI();
+
         if(!Paused)
         {
             List<GameObject> intersectedPlanes = PlaneCheck.GetAllIntersectingPlanes();
@@ -428,5 +434,24 @@ public class PlatformingPlayer : MonoBehaviour
 
         Rb.velocity = PreviousVelocity;
         Rb.gravityScale = PreviousGravity;
+    }
+
+    public void UpdateProgressUI()
+    {
+        CheckpointCounter.text = "Checkpoints tagged: " + SceneTransitioner.ActivatedRespawnPoints.Count + "/12";
+        int EncountersCleared = 0;
+        if (SceneTransitioner.CompletedEncounters.Contains("3DIsometric"))
+        {
+            EncountersCleared++;
+        }
+        if (SceneTransitioner.CompletedEncounters.Contains("3DIsometricEncounter2"))
+        {
+            EncountersCleared++;
+        }
+        if (SceneTransitioner.CompletedEncounters.Contains("AutoscrollWithSlope"))
+        {
+            EncountersCleared++;
+        }
+        EncounterCounter.text = "Splatters cleared: " + EncountersCleared + "/3";
     }
 }

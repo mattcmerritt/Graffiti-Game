@@ -64,19 +64,19 @@ public class PlatformingLevel : MonoBehaviour
     private void TrackPlayerDash(float cooldown)
     {
         OnPlayerDash?.Invoke(cooldown);
-        Debug.Log("dash cd: " + cooldown);
+        // Debug.Log("dash cd: " + cooldown);
     }
 
     private void TrackPlayerDoubleJump()
     {
         OnPlayerDoubleJump?.Invoke();
-        Debug.Log("double jump");
+        // Debug.Log("double jump");
     }
 
     private void TrackPlayerDoubleJumpRefresh()
     {
         OnPlayerDoubleJumpRefresh?.Invoke();
-        Debug.Log("double jump reset");
+        // Debug.Log("double jump reset");
     }
 
     private void PauseGame()

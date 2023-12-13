@@ -3986,6 +3986,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4241119559426800014, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
+      propertyPath: SpawnTimeInterval
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8058895914005532817, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
       propertyPath: m_Name
       value: Drip Source (2)
@@ -4923,6 +4927,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4241119559426800014, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
+      propertyPath: SpawnTimeInterval
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8058895914005532817, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
       propertyPath: m_Name
       value: Drip Source (3)
@@ -6160,6 +6168,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4241119559426800014, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
+      propertyPath: SpawnTimeInterval
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8058895914005532817, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
       propertyPath: m_Name
       value: Drip Source (1)
@@ -8135,7 +8147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8072356111608805672, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.97
+      value: -21.61
       objectReference: {fileID: 0}
     - target: {fileID: 8072356111608805672, guid: 5c285b35bfb59ae4ab579c1904715133, type: 3}
       propertyPath: m_LocalPosition.y
