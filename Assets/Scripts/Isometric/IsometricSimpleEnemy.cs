@@ -28,6 +28,10 @@ public class IsometricSimpleEnemy : MonoBehaviour
     // Separate collider on a different layer that detects where the player is
     [SerializeField] private EnemyProximityChecker ProximityChecker;
 
+    // Animation
+    [SerializeField] private Animator Animator;
+    [SerializeField] private SpriteRenderer SpriteRenderer;
+
     private void Start()
     {
         Player = FindObjectOfType<IsometricPlayer>().gameObject;
@@ -47,6 +51,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
             // If preparing a charge, sit still until the duration is over, then charge.
             if (Preparing)
             {
+                Animator.Play("EnemyIdle");
                 CurrentPrepTimer += Time.deltaTime;
                 if (CurrentPrepTimer >= PrepDuration)
                 {
@@ -60,6 +65,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
             // If charging, keep track of how long the charge has been going for and start retreating at end
             else if (Charging)
             {
+                Animator.Play("EnemyAttack");
                 CurrentChargeTimer += Time.deltaTime;
                 if (CurrentChargeTimer >= ChargeDuration)
                 {
@@ -72,6 +78,7 @@ public class IsometricSimpleEnemy : MonoBehaviour
             // If retreating, run away from the player for a bit
             else if (Retreating)
             {
+                Animator.Play("EnemyWalk");
                 CurrentRetreatTimer += Time.deltaTime;
                 Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
                 Rigidbody.velocity = directionToPlayer * RetreatSpeed * -1;
@@ -84,13 +91,25 @@ public class IsometricSimpleEnemy : MonoBehaviour
             // Otherwise, keep trying to get close to the player
             else
             {
+                Animator.Play("EnemyWalk");
                 Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
                 Rigidbody.velocity = directionToPlayer * MoveSpeed;
             }
         }
         else
         {
+            Animator.Play("EnemyIdle");
             Rigidbody.velocity = Vector3.zero;
+        }
+
+        // Flip the sprite if the player is to the right of the monster
+        if (!Physics.CheckBox(transform.position + new Vector3(-35, 0, 35), new Vector3(50, 10, 50), transform.rotation, LayerMask.GetMask("Player"))) 
+        {
+            SpriteRenderer.flipX = true;
+        }
+        else
+        {
+            SpriteRenderer.flipX = false;
         }
     }
 
